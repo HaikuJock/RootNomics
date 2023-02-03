@@ -1,4 +1,38 @@
-.vs/
-RootNomicsGame/RootNomicsGame/bin/
-RootNomicsGame/RootNomicsGame/obj/
-RootNomicsGame/RootNomicsGame/Content/obj/
+
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.obj
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.lib
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+.vs
+
+#Ignore nuget packages
+#See https://docs.microsoft.com/en-us/nuget/consume-packages/package-restore
+#to restore packages
+packages/**/*
+!packages/repositories.config
+TestPlaylists/*
+Documentation/Documentation.chw
+*.userprefs

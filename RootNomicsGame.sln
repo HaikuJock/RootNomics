@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.MonoGameUI", "Haiku.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku", "Haiku\Haiku.csproj", "{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootNomics.Mac", "RootNomics.Mac\RootNomics.Mac.csproj", "{1F1F464A-4615-4F29-A7B3-A637E88E48AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RootNomics.Mac", "RootNomics.Mac\RootNomics.Mac.csproj", "{1F1F464A-4615-4F29-A7B3-A637E88E48AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootNomics.Win", "RootNomics.Win\RootNomics.Win.csproj", "{F3A92306-B463-4334-8F52-1AE59725B1FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RootNomics.Win", "RootNomics.Win\RootNomics.Win.csproj", "{F3A92306-B463-4334-8F52-1AE59725B1FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EconomySim", "EconomySim\EconomySim.csproj", "{A48645C0-2BAD-468A-A269-D172ED5DEFFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Release|x64.ActiveCfg = Release|Any CPU
 		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Release|x64.Build.0 = Release|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Debug|x64.Build.0 = Debug|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Release|x64.ActiveCfg = Release|Any CPU
+		{A48645C0-2BAD-468A-A269-D172ED5DEFFB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

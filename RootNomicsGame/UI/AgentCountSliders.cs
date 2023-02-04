@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace RootNomicsGame.UI
 {
-    internal class AgentCountSliders : Panel
+    internal class LinkedSliders : Panel
     {
         private readonly int totalAgents;
         Label totalAgentCountLabel;
         Dictionary<string, AgentSlider> sliders;
         
-        internal AgentCountSliders(Rectangle frame, IDictionary<string, string> agentTypeNames, int totalAgents)
+        internal LinkedSliders(Rectangle frame, IDictionary<string, string> agentTypeNames, int totalAgents)
             : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 8, 16, 16))
         {
             BackgroundColor = Color.MintCream;

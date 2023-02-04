@@ -54,7 +54,7 @@ namespace RootNomicsGame.Simulation
             //    System.Diagnostics.Debug.WriteLine($"{type}: {state.AgentTypeCounts[type]}");
             //}
 
-            economy.simulate(200);
+            economy.simulate(60);
 
             return CalculateSimulationState();
         }

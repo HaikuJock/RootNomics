@@ -36,7 +36,7 @@ namespace RootNomicsGame.Simulation
             var market = economy.getMarket("default");
             
             market.enforceAgentTypeCounts(agentTypeCounts);
-            economy.simulate(100);
+            economy.simulate(200);
 
             return CalculateSimulationState();
         }

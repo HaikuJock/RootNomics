@@ -32,15 +32,15 @@ namespace Haiku.MonoGameUI.LayoutStrategies
         class Transformer
         {
             internal readonly Func<Point, List<Layout>, Point> Initiator;
-            internal readonly Func<Point, Layout, Point> Transform;
+            internal readonly Func<Point, Point, Layout, Point> Transform;
 
-            public Transformer((Func<Point, List<Layout>, Point>, Func<Point, Layout, Point>) init)
+            public Transformer((Func<Point, List<Layout>, Point>, Func<Point, Point, Layout, Point>) init)
             {
                 Initiator = init.Item1;
                 Transform = init.Item2;
             }
 
-            public Transformer(Func<Point, List<Layout>, Point> initiator, Func<Point, Layout, Point> transform)
+            public Transformer(Func<Point, List<Layout>, Point> initiator, Func<Point, Point, Layout, Point> transform)
             {
                 Initiator = initiator;
                 Transform = transform;
@@ -58,7 +58,7 @@ namespace Haiku.MonoGameUI.LayoutStrategies
                         { ItemAlignment.Start, new Dictionary<FlexDirection, Transformer> {
                             { FlexDirection.Row, new Transformer(
                               (_,__) => Point.Zero,
-                              (Point point, Layout child) => {
+                              (Point parentSize, Point point, Layout child) => {
                                child.Frame = new Rectangle(new Point(point.X, child.Frame.Y), child.Size);
                                   return new Point(child.Frame.Right, child.Frame.Top);
                               }
@@ -71,7 +71,7 @@ namespace Haiku.MonoGameUI.LayoutStrategies
                         { ItemAlignment.Start, new Dictionary<FlexDirection, Transformer> {
                             { FlexDirection.Row, new Transformer(
                                 (parentSize, children) => new Point(parentSize.X - children.Sum(child => child.Size.X), 0),
-                                (Point left, Layout child) => {
+                                (Point parentSize, Point left, Layout child) => {
                                     child.Frame = new Rectangle(new Point(left.X, child.Frame.Y), child.Size);
                                     return new Point(child.Frame.Right, child.Frame.Top); }
                               ) }
@@ -85,7 +85,7 @@ namespace Haiku.MonoGameUI.LayoutStrategies
                                 parentSize, List<Layout>
                                 children) =>
                             new Point(parentSize.X / 2 - children.Sum(child => child.Size.X) / 2, 0),
-                                (Point left, Layout child) => {
+                                (Point parentSize, Point left, Layout child) => {
                                     child.Frame = new Rectangle(new Point(left.X, child.Frame.Y), child.Size);
                                     return new Point(child.Frame.Right, child.Frame.Top); }
                               ) }
@@ -105,14 +105,14 @@ namespace Haiku.MonoGameUI.LayoutStrategies
                                 }
                                 return new Point(0, (parentSize.X - children.Sum(child => child.Size.X)) / (children.Count - 1));
                             },
-                                (Point leftAndBetween, Layout child) => {
+                                (Point parentSize, Point leftAndBetween, Layout child) => {
                                     child.Frame = new Rectangle(leftAndBetween.X, child.Frame.Y, child.Size.X, child.Size.Y);
                                     return new Point(child.Frame.Right + leftAndBetween.Y, leftAndBetween.Y); }
                                 ) },
                             { FlexDirection.RowReverse, new Transformer( (Point
                                 parentSize, List<Layout>
                                 children) => new Point(parentSize.X, 0),
-                                (Point right, Layout child) => {
+                                (Point parentSize, Point right, Layout child) => {
                                     child.Frame = new Rectangle(new Point(right.X - child.Size.X, child.Frame.Y), child.Size);
                                     return new Point(child.Frame.Left, 0); }
                                 ) }
@@ -131,8 +131,25 @@ namespace Haiku.MonoGameUI.LayoutStrategies
                                     var around = space / children.Count;
                                     return new Point(around / 2, around);
                                 },
-                                (Point leftAndAround, Layout child) => {
+                                (Point parentSize, Point leftAndAround, Layout child) => {
                                     child.Frame = new Rectangle(leftAndAround.X, child.Frame.Y, child.Size.X, child.Size.Y);
+                                    return new Point(child.Frame.Right + leftAndAround.Y, leftAndAround.Y); }
+                                ) }
+                        }
+                    },
+                        { ItemAlignment.Center, new Dictionary<FlexDirection, Transformer> {
+                            { FlexDirection.Row, new Transformer( (Point
+                                parentSize, List<Layout>
+                                children) =>
+                                {
+                                    var contentSize = children.Sum(child => child.Size.X);
+                                    var space = parentSize.X - contentSize;
+                                    var around = space / children.Count;
+                                    return new Point(around / 2, around);
+                                },
+                                (Point parentSize, Point leftAndAround, Layout child) => {
+                                    var y = parentSize.Y / 2 - child.Frame.Height / 2;
+                                    child.Frame = new Rectangle(leftAndAround.X, y, child.Size.X, child.Size.Y);
                                     return new Point(child.Frame.Right + leftAndAround.Y, leftAndAround.Y); }
                                 ) }
                         }
@@ -151,7 +168,7 @@ namespace Haiku.MonoGameUI.LayoutStrategies
 
                 children.Aggregate(
                     transformer.Initiator(parentSize, children),
-                    transformer.Transform
+                    (pt, layout) => transformer.Transform(parentSize, pt, layout)
                     );
             }
             // assumption all layouts can be achieved with a single aggregation over children

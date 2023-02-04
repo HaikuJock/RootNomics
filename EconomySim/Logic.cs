@@ -7,7 +7,7 @@ namespace EconomySim
 {
     public class Logic
     {
-	    private bool init = false;
+	    //private bool init = false;
 
         //public function new(?data:Dynamic)
         //{

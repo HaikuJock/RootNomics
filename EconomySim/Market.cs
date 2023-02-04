@@ -261,7 +261,7 @@ namespace EconomySim
 		    return _goodTypes;
 	    }
 
-	    public Good getGoodEntry(String str)
+	    public Good? getGoodEntry(String str)
 	    {
 		    if (_mapGoods.ContainsKey(str))
 		    {
@@ -349,7 +349,7 @@ namespace EconomySim
 			    var profit = history.profit.average(key, rounds);
 			    mr.strListAgentProfit += Quick.numStr(profit, 2) + "\n";
 
-			    double test_profit = 0;
+			    //double test_profit = 0;
 			    var list = _agents; //var list = _agents.filter(function(a:BasicAgent):Bool { return a.className == key; } );  dfs stub wtf
 			    int count = 0;
 			    double money = 0;
@@ -547,8 +547,8 @@ namespace EconomySim
 
 		    String curr_class = "";
 		    String last_class = "";
-		    List<double> list  = null;
-		    double avg_profit = 0;
+		    List<double>? list = null;
+		    //double avg_profit = 0;
 
 		    for (int i=0;i<ag.Count; i++)
 		    {
@@ -564,11 +564,14 @@ namespace EconomySim
 				    list = new List<double>();		//make a new list
 				    last_class = curr_class;
 			    }
-			    list.Add(a.get_profit());			//push profit onto list
+			    list?.Add(a.get_profit());			//push profit onto list
 		    }
 
-		    //add the last class too
-		    history.profit.add(last_class, Quick.listAvgf(list));
+			if (list != null)               //do we have a list built up?
+			{
+				//add the last class too
+				history.profit.add(last_class, Quick.listAvgf(list));
+			}
 
 		    //sort by id so everything works again
 		    //_agents.Sort(Quick.sortAgentId);

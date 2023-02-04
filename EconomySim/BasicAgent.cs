@@ -14,9 +14,9 @@ namespace EconomySim
     public class AgentData {
 	    public string className { get; set;}
 	    public double money;
-	    public InventoryData inventory;
+	    public InventoryData? inventory;
 	    public string logicName;
-	    public  Logic logic;
+	    public Logic logic;
 	    public int? lookBack;
 
         public AgentData(string className, double money, string logicName)
@@ -24,8 +24,8 @@ namespace EconomySim
             this.className = className;
             this.money = money;
             this.logicName = logicName;
+			logic = new Logic();
         }
-
     }
 
     public class Point
@@ -64,7 +64,7 @@ namespace EconomySim
 	    private Logic _logic;
 	    protected Inventory _inventory;
 	    protected Dictionary<string,List<double>> _observedTradingRange;
-	    private double _profit = 0;	//profit from last round
+	    //private double _profit = 0;	//profit from last round
 	    private int _lookback = 15;
 
 
@@ -74,7 +74,10 @@ namespace EconomySim
 		    className = data.className;
 		    money = data.money;
 		    _inventory = new Inventory();
-		    _inventory.fromData(data.inventory);
+			if (data.inventory != null)
+			{
+				_inventory.fromData(data.inventory);
+			}
 		    _logic = data.logic;
 
 		    if (data.lookBack == null)
@@ -101,8 +104,6 @@ namespace EconomySim
                 list.Clear();
 		    }
             _observedTradingRange.Clear();
-		    _observedTradingRange = null;
-		    _logic = null;
 	    }
 
 	    public void init(Market market)
@@ -123,7 +124,7 @@ namespace EconomySim
 
 	    public void simulate(Market market)
 	    {
-		    _logic.perform(this, market);
+		    _logic?.perform(this, market);
 	    }
 
         public virtual void generateOffers(Market bazaar, string good)
@@ -136,13 +137,13 @@ namespace EconomySim
 		    //no implementation -- provide your own in a subclass
 	    }
 
-	    public virtual Offer createBid(Market bazaar, String good, double limit)
+	    public virtual Offer? createBid(Market bazaar, String good, double limit)
 	    {
 		    //no implementation -- provide your own in a subclass
 		    return null;
 	    }
 
-        public virtual Offer createAsk(Market bazaar, String commodity_, double limit_)
+        public virtual Offer? createAsk(Market bazaar, String commodity_, double limit_)
 	    {
 		    //no implementation -- provide your own in a subclass
 		    return null;

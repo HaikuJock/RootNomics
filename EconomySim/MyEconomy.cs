@@ -223,7 +223,7 @@ namespace EconomySim
                 case "woodcutter": return new LogicWoodcutter();
                 case "worker": return new LogicWorker();
             }
-            return null;
+            return new Logic();
         }
     }
 

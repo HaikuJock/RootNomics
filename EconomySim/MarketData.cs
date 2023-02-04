@@ -24,8 +24,8 @@ namespace EconomySim
 	     * @param	getAgent	a function to create agents
 	     */
 
-	    public static MarketData fromJSON(string json, BasicAgent getAgent)
-	    {
+	    //public static MarketData fromJSON(string json, BasicAgent getAgent)
+	    //{
             //var goods:Array<Good> = [];
 
             ////Create goods index
@@ -91,7 +91,7 @@ namespace EconomySim
             //}
 
             //return new MarketData(goods, agentTypes, agents);
-            return null;
-	    }
+     //       return null;
+	    //}
     }
 }

@@ -22,7 +22,7 @@ namespace EconomySim
 		    }
 	    }
 
-	    public Market getMarket(String name)
+	    public Market? getMarket(String name)
 	    {
 		    foreach (var m in _markets)
 		    {

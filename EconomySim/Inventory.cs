@@ -89,9 +89,6 @@ namespace EconomySim
             _stuff.Clear();
             _ideal.Clear();
             _sizes.Clear();
-		    _stuff = null;
-		    _ideal = null;
-		    _sizes = null;
 	    }
 
 	    /**

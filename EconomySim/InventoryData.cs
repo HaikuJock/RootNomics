@@ -15,13 +15,12 @@ namespace EconomySim
 	    public Dictionary<String, double> start;
 	    public Dictionary<String, double> size;
 
-	    public InventoryData(double maxSize, Dictionary<String,double>ideal, Dictionary<String,double>start, Dictionary<String,double>size)
+	    public InventoryData(double maxSize, Dictionary<String,double>ideal, Dictionary<String,double>start, Dictionary<String,double>? size)
 	    {
 		    this.maxSize = maxSize;
 		    this.ideal = ideal;
 		    this.start = start;
-		    this.size = size;
-            if (this.size == null)
+            if (size == null)
             {
                 this.size = new Dictionary<string, double>();
                 foreach (KeyValuePair<String, double> entry in start)
@@ -29,10 +28,14 @@ namespace EconomySim
                     this.size[entry.Key] = 1;
                 }
             }
+            else
+            {
+                this.size = size;
+            }
 	    }
 
-	    public InventoryData(string data)
-	    {
+	    //public InventoryData(string data)
+	    //{
             //var maxSize:Int = data.max_size;
             //var ideal = new Map<String, Float>();
             //var start = new Map<String, Float>();
@@ -57,6 +60,6 @@ namespace EconomySim
             //}
 
             //return new InventoryData(maxSize, ideal, start, size);
-	    }
+	    //}
     }
 }

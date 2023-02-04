@@ -1,9 +1,11 @@
-﻿using Haiku.MonoGameUI;
+﻿using Haiku.Audio;
+using Haiku.MonoGameUI;
 using Haiku.MonoGameUI.Layouts;
 using Haiku.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RootNomicsGame.UI;
 using System;
 using TexturePackerLoader;
 using TexturePackerMonoGameDefinitions;
@@ -12,26 +14,37 @@ namespace RootNomicsGame
 {
     public class RootNomics : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager graphicsManager;
         private SpriteBatch _spriteBatch;
         internal SpriteSheet UiSpriteSheet { get; private set; }
         UserInterface userInterface;
         MousePressEventProviding mousePressEventProvider;
+        HUD hud;
+        AudioPlaying audio;
 
         public RootNomics()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphicsManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             mousePressEventProvider = new MousePressEventProvider();
             mousePressEventProvider.Initialize(this);
-            userInterface = new UserInterface(this, mousePressEventProvider, new BrowserOpener(), new TextClipboard(), new NullAudioPlayer());
+            audio = new NullAudioPlayer();
+            userInterface = new UserInterface(this, mousePressEventProvider, new BrowserOpener(), new TextClipboard(), audio);
             Components.Add(userInterface);
+            // Robb: Add your component here: e.g.
+            // Components.Add(garden);
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            graphicsManager.PreferredBackBufferWidth = 1768;
+            graphicsManager.PreferredBackBufferHeight = 992;
+            graphicsManager.IsFullScreen = false;
+            graphicsManager.HardwareModeSwitch = false;
+            graphicsManager.ApplyChanges();
+
             LoadUIContent();
             Window.KeyDown += OnKeyDown;
             Window.KeyUp += OnKeyUp;
@@ -41,6 +54,10 @@ namespace RootNomicsGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            userInterface.Pointer = UiSpriteSheet.Sprite(UITextureAtlas.IconPointer);
+            var screenSize = GraphicsDevice.Viewport.Bounds.Size;
+            hud = new HUD(new Rectangle(Point.Zero, screenSize), audio);
+            userInterface.PushWindow(hud);
 
             // TODO: use this.Content to load your game content here
         }

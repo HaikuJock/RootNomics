@@ -29,7 +29,7 @@ namespace RootNomicsGame.UI
         List<LinkedSlider> others;
         public int Value => slider?.Value ?? 0;
         readonly string id;
-        readonly int max;
+        int max;
         List<LinkedSlider>.Enumerator othersIterator;
         OrdinalSlider slider;
         Label nameLabel;
@@ -38,7 +38,7 @@ namespace RootNomicsGame.UI
         Label valueLabel;
 
         internal LinkedSlider(string id, string name, int max)
-            : base(new Rectangle(0, 0, 200, 44), Orientation.Vertical, 0, 0)
+            : base(new Rectangle(0, 0, Width, 44), Orientation.Vertical, 0, 0)
         {
             this.id = id;
             this.max = max;
@@ -59,7 +59,7 @@ namespace RootNomicsGame.UI
             minMaxLayout.AddChildren(new[] { minLabel, maxLabel });
             AddChild(minMaxLayout);
 
-            var sliderFrame = new Rectangle(0, 0, 200, 22);
+            var sliderFrame = new Rectangle(0, 0, Width, 22);
             slider = new OrdinalSlider(sliderFrame, 12, new Point(22, 22), 0, max);
             slider.OnChanged = OnCountChanged;
 
@@ -108,5 +108,16 @@ namespace RootNomicsGame.UI
             SetValueLabel(value);
         }
 
+        internal void SetMax(int max)
+        {
+            this.max = max;
+            TotalLabel.Text = $"Available: {max}";
+            slider?.RemoveFromParent();
+            var sliderFrame = new Rectangle(0, 0, Width, 22);
+            slider = new OrdinalSlider(sliderFrame, 12, new Point(22, 22), 0, max);
+            slider.OnChanged = OnCountChanged;
+
+            AddChild(slider);
+        }
     }
 }

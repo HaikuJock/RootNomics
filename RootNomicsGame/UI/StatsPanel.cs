@@ -2,6 +2,7 @@
 using Haiku.MonoGameUI.Layouts;
 using Haiku.MonoGameUI.LayoutStrategies;
 using Microsoft.Xna.Framework;
+using RootNomicsGame.Simulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,13 @@ namespace RootNomicsGame.UI
             juiceLayout.AddChildren(new[] { juiceTitle, juiceLabel });
 
             AddChildren(new[] {foodLayout, wealthLayout, juiceLayout});
+        }
+
+        internal void Update(SimulationState state)
+        {
+            foodLabel.Text = state.TotalFood.ToString();
+            wealthLabel.Text = state.TotalWealth.ToString();
+            juiceLabel.Text = state.TotalMagicJuice.ToString();
         }
     }
 }

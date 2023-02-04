@@ -45,8 +45,21 @@ namespace RootNomicsGame.UI
 
             content.AddChild(consumption);
 
+            consumption.GrowButton.Action += EndTurn;
             simulator.Initialize(Configuration.InitialAgentTypeCount);
             AddChild(content);
+        }
+
+        void EndTurn(object button)
+        {
+            var agentValues = agentCountSliders.GetValues();
+            var healing = consumption.GetValues();
+
+            var state = simulator.Simulate(agentValues, healing[ConsumptionPanel.PlantHealingKey]);
+
+            stats.Update(state);
+            agentCountSliders.Update(state.Agents.Count);
+            consumption.Update(state.TotalMagicJuice);
         }
     }
 }

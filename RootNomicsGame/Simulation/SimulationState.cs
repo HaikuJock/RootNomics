@@ -18,6 +18,28 @@ namespace RootNomicsGame.Simulation
         {
             Agents = new List<Agent>();
             RebornAgents = new Dictionary<string, string>();
+            var random = new Random();
+
+            TotalFood = random.Next(10, 100);
+            TotalWealth = 0;
+            TotalMagicJuice = random.Next(10, 100);
+
+            var agentCount = random.Next(0, 100);
+            var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
+            for (int i = 0; i < agentCount; i++)
+            {
+                var typeIndex = random.Next(0, typeIds.Count);
+                var type = typeIds[typeIndex];
+                var wealth = random.Next(0, 33);
+
+                TotalWealth += wealth;
+                Agents.Add(new Agent()
+                {
+                    Id = i.ToString(),
+                    Type = type,
+                    Wealth = wealth,
+                });
+            }
         }
     }
 }

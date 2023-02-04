@@ -14,6 +14,7 @@ namespace RootNomicsGame.UI
 {
     internal class ConsumptionPanel : Panel
     {
+        internal const string PlantHealingKey = "potions-for-plants-id";
         internal Button GrowButton;
         LinkedSliders consumptionSliders;
         const int GrowPanelHeight = 60;
@@ -26,7 +27,7 @@ namespace RootNomicsGame.UI
             var slidersFrame = new Rectangle(0, 0, frame.Width, frame.Height - GrowPanelHeight);
             var consumption = new Dictionary<string, string>
             {
-                { "potions-for-plants-id", "Heal Plants:" },
+                { PlantHealingKey, "Heal Plants:" },
                 { "potions-for-player-id", "Heal Self:" },
             };
             consumptionSliders = new LinkedSliders(slidersFrame, consumption, 0);
@@ -47,5 +48,9 @@ namespace RootNomicsGame.UI
             AddChild(consumptionSliders);
             AddChild(growLayout);
         }
+
+        internal Dictionary<string, int> GetValues() => consumptionSliders.GetValues();
+
+        internal void Update(int totalMagicJuice) => consumptionSliders.Update(totalMagicJuice);
     }
 }

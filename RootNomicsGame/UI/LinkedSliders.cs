@@ -13,7 +13,7 @@ namespace RootNomicsGame.UI
 {
     internal class LinkedSliders : Panel
     {
-        private readonly int total;
+        int total;
         Label totalCountLabel;
         Dictionary<string, LinkedSlider> sliders;
         
@@ -43,6 +43,21 @@ namespace RootNomicsGame.UI
             this.total = total;
         }
 
+        internal Dictionary<string, int> GetValues()
+        {
+            var result = new Dictionary<string, int>();
+
+            foreach (var slider in sliders)
+            {
+                var sliderId = slider.Key;
+                var sliderControl = slider.Value;
+
+                result[sliderId] = sliderControl.Value;
+            }
+
+            return result;
+        }
+
         internal void SetValues(Dictionary<string, int> values)
         {
             foreach (var value in values)
@@ -55,6 +70,16 @@ namespace RootNomicsGame.UI
             }
             var available = total - values.Values.Sum();
             totalCountLabel.Text = $"Available: {available}";
+        }
+
+        internal void Update(int total)
+        {
+            this.total = total;
+            foreach (var slider in sliders.Values)
+            {
+                slider.SetMax(total);
+            }
+            SetValues(sliders.Keys.ToDictionary(key => key, key => 0));
         }
     }
 }

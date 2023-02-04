@@ -13,9 +13,9 @@ namespace RootNomicsGame.Simulation
 
         }
 
-        internal IEnumerable<Agent> Simulate(IDictionary<string, int> agentTypeCount)
+        internal SimulationState Simulate(IDictionary<string, int> agentTypeCount)
         {
-            return new List<Agent>();
+            return new SimulationState();
         }
     }
 }

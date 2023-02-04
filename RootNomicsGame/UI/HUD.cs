@@ -15,6 +15,8 @@ namespace RootNomicsGame.UI
     internal class HUD : Window
     {
         AgentCountSliders agentCountSliders;
+        StatsPanel stats;
+        ConsumptionPanel consumption;
         readonly Simulator simulator;
         Layout content;
 
@@ -33,7 +35,7 @@ namespace RootNomicsGame.UI
             agentCountSliders.SetValues(Configuration.InitialAgentTypeCount);
 
             var statsFrame = new Rectangle(agentCountSliders.Frame.Right + 16, 0, frame.Width - 2 * (agentCountSliders.Frame.Right + 16), 44);
-            var stats = new StatsPanel(statsFrame);
+            stats = new StatsPanel(statsFrame);
 
             content.AddChild(stats);
 

@@ -13,7 +13,7 @@ namespace RootNomicsGame.Simulation
 
         }
 
-        internal SimulationState Simulate(IDictionary<string, int> agentTypeCount)
+        internal SimulationState Simulate(IDictionary<string, int> agentTypeCount, int magicJuiceForPlants)
         {
             return new SimulationState();
         }

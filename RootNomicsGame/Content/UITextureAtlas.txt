@@ -4,43 +4,44 @@
 # To learn how to import these sprites into your MonoGame project visit:
 # https://www.codeandweb.com/texturepacker/monogame
 #
-# Sprite sheet: UITextureAtlas.png (360 x 32)
-# $TexturePacker:SmartUpdate:c894ee76a8e02a539cf38df57ad1105b:87840322b6dd4cc4e9174c1d7002f019:ab4ed61aee9c20e10cf08a931d1d0a05$
+# Sprite sheet: UITextureAtlas.png (60 x 224)
+# $TexturePacker:SmartUpdate:ac3ac1883bb0b02259ef217599ba4608:8a0461b78bd4753810c67c2b2e219d57:ab4ed61aee9c20e10cf08a931d1d0a05$
 #
 
-BackgroundTopBar;0;172;20;11;11;11;11;0.5;0.5
-ButtonActive;0;102;1;19;19;19;19;0.5;0.5
-ButtonCheckBoxActive;0;79;1;21;21;21;21;0.5;0.5
-ButtonNormal;0;123;1;19;19;19;19;0.5;0.5
-ButtonPullDown;0;1;1;50;24;50;24;0.5;0.5
-ButtonSelected;0;144;1;19;19;19;19;0.5;0.5
-CellActive;0;328;1;13;13;13;13;0.5;0.5
-CellNormal;0;330;16;13;13;13;13;0.5;0.5
-CellSelected;0;343;1;13;13;13;13;0.5;0.5
-DualSliderTrackLeft;0;128;22;9;9;9;9;0.5;0.5
-DualSliderTrackMiddle;0;139;22;9;9;9;9;0.5;0.5
-IconCheck;0;53;1;24;24;24;24;0.5;0.5
-IconMinus;0;79;24;17;5;17;5;0.5;0.5
-IconPlus;0;165;1;17;17;17;17;0.5;0.5
-IconScrollBarDown;0;222;19;16;12;16;12;0.5;0.5
-IconScrollBarDownActive;0;240;19;16;12;16;12;0.5;0.5
-IconScrollBarDownSelected;0;258;19;16;12;16;12;0.5;0.5
-IconScrollBarLeft;0;272;1;12;16;12;16;0.5;0.5
-IconScrollBarLeftActive;0;286;1;12;16;12;16;0.5;0.5
-IconScrollBarLeftSelected;0;300;1;12;16;12;16;0.5;0.5
-IconScrollBarRight;0;240;1;14;16;16;16;0.5;0.5
-IconScrollBarRightActive;0;256;1;14;16;16;16;0.5;0.5
-IconScrollBarRightSelected;0;314;1;12;16;12;16;0.5;0.5
-IconScrollBarUp;0;276;19;16;12;16;12;0.5;0.5
-IconScrollBarUpActive;0;294;19;16;12;16;12;0.5;0.5
-IconScrollBarUpSelected;0;312;19;16;12;16;12;0.5;0.5
-MissingIcon;0;222;1;16;16;16;16;0.5;0.5
-ScrollBarBackground;0;184;1;17;17;17;17;0.5;0.5
-ShadowBottom;0;98;24;5;5;5;5;0.5;0.5
-ShadowLeftAndCorners;0;185;20;11;11;11;11;0.5;0.5
-ShadowRightAndCorners;0;198;20;11;11;11;11;0.5;0.5
-ShadowTop;0;211;20;5;5;5;5;0.5;0.5
-SliderTrackLeft;0;150;22;9;9;9;9;0.5;0.5
-SliderTrackRight;0;161;22;9;9;9;9;0.5;0.5
-TextFieldBackground;0;203;1;17;17;17;17;0.5;0.5
-TextFieldIBar;1;105;22;21;9;9;21;0.5;0.5
+BackgroundTopBar;0;1;12;11;11;11;11;0.5;0.5
+ButtonActive;0;37;128;19;19;19;19;0.5;0.5
+ButtonCheckBoxActive;0;1;173;21;21;21;21;0.5;0.5
+ButtonNormal;0;1;152;19;19;19;19;0.5;0.5
+ButtonPullDown;0;1;199;50;24;50;24;0.5;0.5
+ButtonSelected;0;22;152;19;19;19;19;0.5;0.5
+CellActive;0;1;25;13;13;13;13;0.5;0.5
+CellNormal;0;16;25;13;13;13;13;0.5;0.5
+CellSelected;0;31;25;13;13;13;13;0.5;0.5
+DualSliderTrackLeft;0;15;1;9;9;9;9;0.5;0.5
+DualSliderTrackMiddle;0;26;1;9;9;9;9;0.5;0.5
+IconCheck;0;24;173;24;24;24;24;0.5;0.5
+IconMinus;0;14;12;17;5;17;5;0.5;0.5
+IconPlus;0;19;109;17;17;17;17;0.5;0.5
+IconPointer;0;20;128;15;22;32;32;0.8666666666666667;0.5909090909090909
+IconScrollBarDown;0;1;40;16;12;16;12;0.5;0.5
+IconScrollBarDownActive;0;19;40;16;12;16;12;0.5;0.5
+IconScrollBarDownSelected;0;37;40;16;12;16;12;0.5;0.5
+IconScrollBarLeft;0;1;54;12;16;12;16;0.5;0.5
+IconScrollBarLeftActive;0;15;54;12;16;12;16;0.5;0.5
+IconScrollBarLeftSelected;0;29;54;12;16;12;16;0.5;0.5
+IconScrollBarRight;0;1;86;14;16;16;16;0.5;0.5
+IconScrollBarRightActive;0;17;86;14;16;16;16;0.5;0.5
+IconScrollBarRightSelected;0;43;54;12;16;12;16;0.5;0.5
+IconScrollBarUp;0;1;72;16;12;16;12;0.5;0.5
+IconScrollBarUpActive;0;19;72;16;12;16;12;0.5;0.5
+IconScrollBarUpSelected;0;37;72;16;12;16;12;0.5;0.5
+MissingIcon;0;1;109;16;16;16;16;0.5;0.5
+ScrollBarBackground;0;38;109;17;17;17;17;0.5;0.5
+ShadowBottom;0;1;1;5;5;5;5;0.5;0.5
+ShadowLeftAndCorners;0;33;12;11;11;11;11;0.5;0.5
+ShadowRightAndCorners;0;46;12;11;11;11;11;0.5;0.5
+ShadowTop;0;8;1;5;5;5;5;0.5;0.5
+SliderTrackLeft;0;37;1;9;9;9;9;0.5;0.5
+SliderTrackRight;0;48;1;9;9;9;9;0.5;0.5
+TextFieldBackground;0;1;128;17;17;17;17;0.5;0.5
+TextFieldIBar;0;33;86;9;21;9;21;0.5;0.5

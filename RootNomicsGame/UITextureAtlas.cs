@@ -4,7 +4,7 @@
  * Contains references to each image within the sprite sheet.
  *
  * https://www.codeandweb.com/texturepacker
- * $TexturePacker:SmartUpdate:c894ee76a8e02a539cf38df57ad1105b:87840322b6dd4cc4e9174c1d7002f019:ab4ed61aee9c20e10cf08a931d1d0a05$
+ * $TexturePacker:SmartUpdate:ac3ac1883bb0b02259ef217599ba4608:8a0461b78bd4753810c67c2b2e219d57:ab4ed61aee9c20e10cf08a931d1d0a05$
  *
  */
 namespace TexturePackerMonoGameDefinitions
@@ -25,6 +25,7 @@ namespace TexturePackerMonoGameDefinitions
 		public const string IconCheck = "IconCheck";
 		public const string IconMinus = "IconMinus";
 		public const string IconPlus = "IconPlus";
+		public const string IconPointer = "IconPointer";
 		public const string IconScrollBarDown = "IconScrollBarDown";
 		public const string IconScrollBarDownActive = "IconScrollBarDownActive";
 		public const string IconScrollBarDownSelected = "IconScrollBarDownSelected";

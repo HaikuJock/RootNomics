@@ -50,11 +50,16 @@ namespace RootNomicsGame
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            graphicsManager.PreferredBackBufferWidth = 1768;
-            graphicsManager.PreferredBackBufferHeight = 992;
-            graphicsManager.IsFullScreen = false;
+            int w = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            int h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphicsManager.PreferredBackBufferWidth = w;   // 1768
+            graphicsManager.PreferredBackBufferHeight = h; // 992
+            graphicsManager.IsFullScreen = true;
+#if DEBUG
             graphicsManager.HardwareModeSwitch = false;
+#else
+            graphicsManager.HardwareModeSwitch = true;
+#endif
             graphicsManager.ApplyChanges();
 
             LoadUIContent();

@@ -270,8 +270,41 @@ namespace EconomySim
 		    return null;
 	    }
 
-	    /********REPORT**********/
-	    public MarketReport get_marketReport(int rounds)
+        public Dictionary<string, int> countAllGoods()
+        {
+            var result = new Dictionary<string, int>();
+            var accumulation = new Dictionary<string, double>();
+
+            foreach (var goodType in _goodTypes)
+            {
+                accumulation[goodType] = 0;
+            }
+
+            int count = 0;
+            double money = 0;
+
+            foreach (var a in _agents)
+            {
+                count++;
+                money += a.money;
+                foreach (var goodType in _goodTypes)
+                {
+                    accumulation[goodType] += a.queryInventory(goodType);
+                }
+            }
+
+            foreach (var goodType in _goodTypes)
+            {
+                result[goodType] = (int)Math.Round(accumulation[goodType]);
+            }
+
+            result["wealth"] = (int)Math.Round(money);
+
+            return result;
+        }
+
+        /********REPORT**********/
+        public MarketReport get_marketReport(int rounds)
 	    {
 		    var mr = new MarketReport();
 		    mr.strListGood = "Commodities\n\n";

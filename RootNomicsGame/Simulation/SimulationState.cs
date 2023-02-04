@@ -9,7 +9,7 @@ namespace RootNomicsGame.Simulation
     internal class SimulationState
     {
         public List<Agent> Agents;
-        public Dictionary<string, string> RebornAgents; // map of the ids of the agents that have died to the new id they were replaced with
+        public Dictionary<string, string> RebornAgents; // map of the ids of the agents that have died to the new class they have been reborn with
         public int TotalFood;   // Maybe don't need this?
         public int TotalWealth; // I guess I could calculate this?
         public int TotalMagicJuice; // The product that the player either consumes to stay alive or feeds to the simulation to keep the plants alive.
@@ -18,11 +18,20 @@ namespace RootNomicsGame.Simulation
         {
             Agents = new List<Agent>();
             RebornAgents = new Dictionary<string, string>();
+            TotalFood = 0;
+            TotalWealth = 0;
+            TotalMagicJuice = 0;
+        }
+
+        internal static SimulationState FakeState()
+        {
+            var state = new SimulationState();
+
             var random = new Random();
 
-            TotalFood = random.Next(10, 100);
-            TotalWealth = 0;
-            TotalMagicJuice = random.Next(10, 100);
+            state.TotalFood = random.Next(10, 100);
+            state.TotalWealth = 0;
+            state.TotalMagicJuice = random.Next(10, 100);
 
             var agentCount = random.Next(0, 100);
             var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
@@ -32,14 +41,16 @@ namespace RootNomicsGame.Simulation
                 var type = typeIds[typeIndex];
                 var wealth = random.Next(0, 33);
 
-                TotalWealth += wealth;
-                Agents.Add(new Agent()
+                state.TotalWealth += wealth;
+                state.Agents.Add(new Agent()
                 {
                     Id = i.ToString(),
                     Type = type,
                     Wealth = wealth,
                 });
             }
+
+            return state;
         }
     }
 }

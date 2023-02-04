@@ -5,6 +5,7 @@ using Haiku.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RootNomicsGame.Simulation;
 using RootNomicsGame.UI;
 using System;
 using TexturePackerLoader;
@@ -65,6 +66,7 @@ namespace RootNomicsGame
             LoadUIContent();
             Window.KeyDown += OnKeyDown;
             Window.KeyUp += OnKeyUp;
+            
             base.Initialize();
         }
 
@@ -73,7 +75,7 @@ namespace RootNomicsGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             userInterface.Pointer = UiSpriteSheet.Sprite(UITextureAtlas.IconPointer);
             var screenSize = GraphicsDevice.Viewport.Bounds.Size;
-            hud = new HUD(new Rectangle(Point.Zero, screenSize), audio);
+            hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator());
             userInterface.PushWindow(hud);
 
             // TODO: use this.Content to load your game content here

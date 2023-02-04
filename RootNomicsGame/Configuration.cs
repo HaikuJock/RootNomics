@@ -14,5 +14,12 @@ namespace RootNomicsGame
             { "wheat-type", "Wheat" },
             { "mandrake-type", "Mandrake" },
         };
+
+        internal static readonly Dictionary<string, int> InitialAgentTypeCount = new Dictionary<string, int>
+        {
+            { "crocus-type", 3 },
+            { "wheat-type", 3 },
+            { "mandrake-type", 3 },
+        };
     }
 }

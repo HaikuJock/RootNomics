@@ -17,7 +17,7 @@ namespace RootNomicsGame.UI
             : base(frame, audio)
         {
             var slidersFrame = new Rectangle(0, 0, frame.Width, Math.Min(500, (int)(frame.Height * 0.26667f)));
-            agentCountSliders = new AgentCountSliders(slidersFrame);
+            agentCountSliders = new AgentCountSliders(slidersFrame, Configuration.AgentTypeNames, 9);
 
             AddChild(agentCountSliders);
         }

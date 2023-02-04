@@ -13,27 +13,34 @@ namespace RootNomicsGame.UI
 {
     internal class AgentCountSliders : Panel
     {
-        internal const int AgentTypes = 3;
-        internal static readonly string[] AgentTypeNames = new string[]
-        {
-            "Crocus",
-            "Wheat",
-            "Mandrake"
-        };
-        AgentSlider[] sliders = new AgentSlider[AgentTypes];
+        AgentSlider[] sliders;
         
-        internal AgentCountSliders(Rectangle frame)
-            : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 12, 16, 16))
+        internal AgentCountSliders(Rectangle frame, IDictionary<string, string> agentTypeNames, int totalAgents)
+            : base(frame)
         {
             BackgroundColor = Color.MintCream;
 
-            for (int i = 0; i < AgentTypes; i++)
+            sliders = new AgentSlider[agentTypeNames.Count];
+            var slidersFrame = new Rectangle(16, 0, 200, 200);
+            var slidersContainer = new LinearLayout(slidersFrame, Orientation.Vertical, 0, 16);
+            int i = 0;
+            foreach (var typeNames in agentTypeNames)
             {
-                var slider = new AgentSlider(i.ToString(), AgentTypeNames[i], 3);
+                var id = typeNames.Key;
+                var name = typeNames.Value;
+                var slider = new AgentSlider(id, name, totalAgents);
+
                 sliders[i] = slider;
+                ++i;
             }
 
-            AddChildren(sliders);
+            foreach (var slider in sliders)
+            {
+                slider.Others = sliders.Except(new[] { slider }).ToList();
+            }
+            slidersContainer.AddChildren(sliders);
+            AddChild(slidersContainer);
+            Frame = new Rectangle(frame.Left, frame.Top, frame.Width, slidersContainer.Frame.Height);
         }
     }
 }

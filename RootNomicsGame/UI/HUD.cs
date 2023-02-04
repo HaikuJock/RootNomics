@@ -39,6 +39,11 @@ namespace RootNomicsGame.UI
 
             content.AddChild(stats);
 
+            var consumptionFrame = new Rectangle(statsFrame.Right + 16, 0, agentCountSliders.Frame.Width, agentCountSliders.Frame.Height);
+            consumption = new ConsumptionPanel(consumptionFrame);
+
+            content.AddChild(consumption);
+
             simulator.Initialize(Configuration.InitialAgentTypeCount);
             AddChild(content);
         }

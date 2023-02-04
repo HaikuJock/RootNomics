@@ -12,18 +12,23 @@ namespace RootNomicsGame.UI
 {
     internal class ConsumptionPanel : Panel
     {
-        //Label potionAvailable;
-        //Label potionsForPlants;
-        //Label maxPotionsForPlants;
-        //OrdinalSlider potionsForPlantsSlider;
-        //Label potionsForPlants;
-        //Label maxPotionsForPlants;
-        //OrdinalSlider potionsForPlantsSlider;
+        LinkedSliders consumptionSliders;
+        const int GrowPanelHeight = 60;
 
         public ConsumptionPanel(Rectangle frame)
             : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 8, 16))
         {
+            BackgroundColor = Color.AntiqueWhite;
 
+            var slidersFrame = new Rectangle(0, 0, frame.Width, frame.Height - GrowPanelHeight);
+            var consumption = new Dictionary<string, string>
+            {
+                { "potions-for-plants-id", "Heal Plants:" },
+                { "potions-for-player-id", "Heal Self:" },
+            };
+            consumptionSliders = new LinkedSliders(slidersFrame, consumption, 0);
+
+            AddChild(consumptionSliders);
         }
     }
 }

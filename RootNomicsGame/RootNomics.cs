@@ -18,18 +18,30 @@ namespace RootNomicsGame
         private SpriteBatch _spriteBatch;
         internal SpriteSheet UiSpriteSheet { get; private set; }
         UserInterface userInterface;
-        MousePressEventProviding mousePressEventProvider;
         HUD hud;
-        AudioPlaying audio;
+        private readonly MousePressEventProviding mousePressEventProvider;
+        private readonly BrowserOpening browserOpener;
+        private readonly TextClipboarding clipboard;
+        private readonly AudioPlaying audio;
 
         public RootNomics()
         {
+        }
+
+        public RootNomics(
+            MousePressEventProviding mousePressEventProvider,
+            BrowserOpening browserOpener,
+            TextClipboarding clipboard,
+            AudioPlaying audio)
+        {
+            this.mousePressEventProvider = mousePressEventProvider;
+            this.browserOpener = browserOpener;
+            this.clipboard = clipboard;
+            this.audio = audio;
             graphicsManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            mousePressEventProvider = new MousePressEventProvider();
             mousePressEventProvider.Initialize(this);
-            audio = new NullAudioPlayer();
-            userInterface = new UserInterface(this, mousePressEventProvider, new BrowserOpener(), new TextClipboard(), audio);
+            userInterface = new UserInterface(this, mousePressEventProvider, browserOpener, clipboard, audio);
             Components.Add(userInterface);
             // Robb: Add your component here: e.g.
             // Components.Add(garden);

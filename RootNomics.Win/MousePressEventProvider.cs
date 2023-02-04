@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace RootNomicsGame
+namespace RootNomics.Win
 {
     class MousePressEventProvider : MousePressEventProviding
     {

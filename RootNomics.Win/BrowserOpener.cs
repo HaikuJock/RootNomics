@@ -7,7 +7,7 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 #endif
 
-namespace RootNomicsGame
+namespace RootNomics.Win
 {
     class BrowserOpener : BrowserOpening
     {

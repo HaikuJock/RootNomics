@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootNomicsGame", "RootNomicsGame\RootNomicsGame.csproj", "{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RootNomicsGame", "RootNomicsGame\RootNomicsGame.csproj", "{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.UI", "Haiku.UI\Haiku.UI.csproj", "{62229170-3E68-4C3F-8265-DC0AB8FBB833}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.MonoGameUI", "Haiku.MonoGameUI\Haiku.MonoGameUI.csproj", "{5C0C644D-025C-47D9-BECA-7AC661669471}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku", "Haiku\Haiku.csproj", "{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootNomics.Mac", "RootNomics.Mac\RootNomics.Mac.csproj", "{1F1F464A-4615-4F29-A7B3-A637E88E48AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootNomics.Win", "RootNomics.Win\RootNomics.Win.csproj", "{F3A92306-B463-4334-8F52-1AE59725B1FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,22 @@ Global
 		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Release|x64.ActiveCfg = Release|x64
 		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Release|x64.Build.0 = Release|x64
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Debug|x64.Build.0 = Debug|Any CPU
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Release|x64.ActiveCfg = Release|Any CPU
+		{1F1F464A-4615-4F29-A7B3-A637E88E48AE}.Release|x64.Build.0 = Release|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Debug|x64.Build.0 = Debug|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Release|x64.ActiveCfg = Release|Any CPU
+		{F3A92306-B463-4334-8F52-1AE59725B1FF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

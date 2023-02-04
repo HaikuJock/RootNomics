@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RootNomicsGame", "RootNomicsGame\RootNomicsGame.csproj", "{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.UI", "Haiku.UI\Haiku.UI.csproj", "{62229170-3E68-4C3F-8265-DC0AB8FBB833}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku.MonoGameUI", "Haiku.MonoGameUI\Haiku.MonoGameUI.csproj", "{5C0C644D-025C-47D9-BECA-7AC661669471}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Haiku", "Haiku\Haiku.csproj", "{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Debug|x64.Build.0 = Debug|Any CPU
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Release|x64.ActiveCfg = Release|Any CPU
+		{87EE7F85-059B-4EB7-ABD5-4B6B088B30CE}.Release|x64.Build.0 = Release|Any CPU
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Debug|x64.ActiveCfg = Debug|x64
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Debug|x64.Build.0 = Debug|x64
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Release|x64.ActiveCfg = Release|x64
+		{62229170-3E68-4C3F-8265-DC0AB8FBB833}.Release|x64.Build.0 = Release|x64
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Debug|x64.ActiveCfg = Debug|x64
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Debug|x64.Build.0 = Debug|x64
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Release|x64.ActiveCfg = Release|x64
+		{5C0C644D-025C-47D9-BECA-7AC661669471}.Release|x64.Build.0 = Release|x64
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Debug|x64.ActiveCfg = Debug|x64
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Debug|x64.Build.0 = Debug|x64
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Release|x64.ActiveCfg = Release|x64
+		{50F07404-BA44-47EB-B1F2-EC216E4FD9E4}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B44F88A8-795A-482E-8B60-F4886B68144B}
+	EndGlobalSection
+EndGlobal

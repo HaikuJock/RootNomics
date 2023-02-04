@@ -437,6 +437,52 @@ namespace EconomySim
 		    return mr;
 	    }
 
+
+        public void addMoney(int amount)
+        {
+			var random = new Random();
+
+            while (amount > 0)
+			{
+				var index = random.Next(0, _agents.Count);
+				var agent = _agents[index];
+
+				agent.money += 1;
+				amount -= 1;
+			}
+        }
+
+        public void removeGood(string goodType, int amount)
+        {
+			var agentsWithGood = _agents.Where(agent => agent.queryInventory(goodType) > 0).ToList();
+            var totalOfGood = agentsWithGood.Aggregate(0.0, (accum, agent) => accum + agent.queryInventory(goodType));
+			var toRemove = Math.Min(amount, totalOfGood);
+			var random = new Random();
+
+			while (toRemove > 0)
+			{
+				var index = random.Next(0, agentsWithGood.Count);
+				var agent = agentsWithGood[index];
+				var quantity = agent.queryInventory(goodType);
+
+                if (quantity > 0)
+				{
+					var quantityToConsume = Math.Min(quantity, 1);
+                    agent.consumeInventory(goodType, -quantityToConsume);
+					toRemove -= quantityToConsume;
+                    quantity -= quantityToConsume;
+                }
+                if (quantity <= 0)
+				{
+					agentsWithGood.RemoveAt(index);
+					if (agentsWithGood.Count == 0)
+					{
+						break;
+					}
+                }
+            }
+        }
+
         /********PRIVATE*********/
 
         private void fromData(MarketData data)

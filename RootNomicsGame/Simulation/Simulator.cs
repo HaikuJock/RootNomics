@@ -32,9 +32,20 @@ namespace RootNomicsGame.Simulation
             return CalculateSimulationState();
         }
 
-        internal SimulationState Simulate(IDictionary<string, int> agentTypeCounts, int magicJuiceForPlants)
+        internal SimulationState Simulate(IDictionary<string, int> agentTypeCounts, int healingForPlants, int healingForPlayer)
         {
             economy.enforceAgentTypeCounts("default", agentTypeCounts);
+            var market = economy.getMarket("default");
+            if (healingForPlants > 0)
+            {
+                // add money to the economy
+                market.addMoney(healingForPlants);
+            }
+            if (healingForPlayer > 0)
+            {
+                // remove tools from the economy
+                market.removeGood("tools", healingForPlayer);
+            }
             //var state = CalculateSimulationState();
             //var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
 

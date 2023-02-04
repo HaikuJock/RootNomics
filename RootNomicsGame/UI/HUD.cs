@@ -85,7 +85,7 @@ namespace RootNomicsGame.UI
             var agentValues = agentCountSliders.GetValues();
             var healing = consumption.GetValues();
 
-            var state = simulator.Simulate(agentValues, healing[ConsumptionPanel.PlantHealingKey]);
+            var state = simulator.Simulate(agentValues, healing[ConsumptionPanel.PlantHealingKey], healing[ConsumptionPanel.PlayerHealingKey]);
 
             UpdateFromSimulationState(state);
 

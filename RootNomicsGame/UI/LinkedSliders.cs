@@ -13,34 +13,34 @@ namespace RootNomicsGame.UI
 {
     internal class LinkedSliders : Panel
     {
-        private readonly int totalAgents;
-        Label totalAgentCountLabel;
+        private readonly int total;
+        Label totalCountLabel;
         Dictionary<string, AgentSlider> sliders;
         
-        internal LinkedSliders(Rectangle frame, IDictionary<string, string> agentTypeNames, int totalAgents)
+        internal LinkedSliders(Rectangle frame, IDictionary<string, string> sliderTypeNames, int total)
             : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 8, 16, 16))
         {
             BackgroundColor = Color.MintCream;
 
             sliders = new Dictionary<string, AgentSlider>();
-            foreach (var typeNames in agentTypeNames)
+            foreach (var typeNames in sliderTypeNames)
             {
                 var id = typeNames.Key;
                 var name = typeNames.Value;
-                var slider = new AgentSlider(id, name, totalAgents);
+                var slider = new AgentSlider(id, name, total);
 
                 sliders[id] = slider;
             }
 
-            totalAgentCountLabel = new Label($"Available: {totalAgents}", BodyFont);
+            totalCountLabel = new Label($"Available: {total}", BodyFont);
             foreach (var slider in sliders.Values)
             {
                 slider.Others = sliders.Values.Except(new[] { slider }).ToList();
-                slider.TotalLabel = totalAgentCountLabel;
+                slider.TotalLabel = totalCountLabel;
             }
-            AddChild(totalAgentCountLabel);
+            AddChild(totalCountLabel);
             AddChildren(sliders.Values);
-            this.totalAgents = totalAgents;
+            this.total = total;
         }
 
         internal void SetValues(Dictionary<string, int> values)
@@ -53,8 +53,8 @@ namespace RootNomicsGame.UI
 
                 slider.SetValue(count);
             }
-            var available = totalAgents - values.Values.Sum();
-            totalAgentCountLabel.Text = $"Available: {available}";
+            var available = total - values.Values.Sum();
+            totalCountLabel.Text = $"Available: {available}";
         }
     }
 }

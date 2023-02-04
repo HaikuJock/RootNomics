@@ -72,14 +72,14 @@ namespace RootNomicsGame.UI
             totalCountLabel.Text = $"Available: {available}";
         }
 
-        internal void Update(int total)
+        internal void Update(IDictionary<string, int> agentTypeCounts, int total)
         {
             this.total = total;
             foreach (var slider in sliders.Values)
             {
                 slider.SetMax(total);
             }
-            SetValues(sliders.Keys.ToDictionary(key => key, key => 0));
+            SetValues(sliders.Keys.ToDictionary(key => key, key => agentTypeCounts[key]));
         }
     }
 }

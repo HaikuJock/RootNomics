@@ -10,6 +10,7 @@ namespace RootNomicsGame.Simulation
     {
         public List<Agent> Agents;
         public Dictionary<string, string> RebornAgents; // map of the ids of the agents that have died to the new class they have been reborn with
+        public IDictionary<string, int> AgentTypeCounts;
         public int TotalFood;   // Maybe don't need this?
         public int TotalWealth; // I guess I could calculate this?
         public int TotalMagicJuice; // The product that the player either consumes to stay alive or feeds to the simulation to keep the plants alive.
@@ -18,6 +19,7 @@ namespace RootNomicsGame.Simulation
         {
             Agents = new List<Agent>();
             RebornAgents = new Dictionary<string, string>();
+            AgentTypeCounts = new Dictionary<string, int>();
             TotalFood = 0;
             TotalWealth = 0;
             TotalMagicJuice = 0;
@@ -35,6 +37,12 @@ namespace RootNomicsGame.Simulation
 
             var agentCount = random.Next(0, 100);
             var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
+
+            foreach (var type in typeIds)
+            {
+                state.AgentTypeCounts[type] = 0;
+            }
+
             for (int i = 0; i < agentCount; i++)
             {
                 var typeIndex = random.Next(0, typeIds.Count);
@@ -48,6 +56,7 @@ namespace RootNomicsGame.Simulation
                     Type = type,
                     Wealth = wealth,
                 });
+                state.AgentTypeCounts[type] = state.AgentTypeCounts[type] +1;
             }
 
             return state;

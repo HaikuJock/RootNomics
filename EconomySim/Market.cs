@@ -71,8 +71,13 @@ namespace EconomySim
 		    newAgent.init(this);
 	    }
 
-	    //@:access(bazaarbot.agent.BasicAgent)    //dfs stub ????
-	    public void simulate(int rounds)
+        public void enforceAgentTypeCounts(IDictionary<string, int> agentTypeCounts)
+        {
+
+        }
+
+        //@:access(bazaarbot.agent.BasicAgent)    //dfs stub ????
+        public void simulate(int rounds)
 	    {
 		    for (int round=0; round<rounds; round++)
 		    {
@@ -380,9 +385,9 @@ namespace EconomySim
 		    return mr;
 	    }
 
-	    /********PRIVATE*********/
+        /********PRIVATE*********/
 
-	    private void fromData(MarketData data)
+        private void fromData(MarketData data)
 	    {
 		    //Create commodity index
 		    foreach (var g in data.goods)
@@ -593,6 +598,5 @@ namespace EconomySim
 		    seller.money += amount;
 		     buyer.money -= amount;
 	    }
-
-    }
+	}
 }

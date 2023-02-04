@@ -70,13 +70,14 @@ namespace RootNomicsGame.UI
             topContent.AddChild(consumption);
 
             consumption.GrowButton.Action += EndTurn;
-            simulator.Initialize(Configuration.InitialAgentTypeCount);
+            var state = simulator.Initialize(Configuration.InitialAgentTypeCount);
             AddChild(topContent);
 
             var playerFrame = new Rectangle(0, frame.Height - 60 - 32, 200, 60);
             playerPanel = new PlayerPanel(playerFrame);
             AddChild(playerPanel);
             playerPanel.CenterXInParent();
+            UpdateFromSimulationState(state);
         }
 
         void EndTurn(object button)
@@ -86,9 +87,7 @@ namespace RootNomicsGame.UI
 
             var state = simulator.Simulate(agentValues, healing[ConsumptionPanel.PlantHealingKey]);
 
-            stats.Update(state);
-            agentCountSliders.Update(state.Agents.Count);
-            consumption.Update(state.TotalMagicJuice);
+            UpdateFromSimulationState(state);
 
             damageMin *= 2;
             damageMax *= 2;
@@ -105,6 +104,13 @@ namespace RootNomicsGame.UI
                     "You passed on. Your remains decompose into the earth, sustaining the roots of the plants you so dearly love. Will your scion continue your legacy?",
                     new ModalAction("Yes", restart), new ModalAction("No", quit));
             }
+        }
+
+        private void UpdateFromSimulationState(SimulationState state)
+        {
+            stats.Update(state);
+            agentCountSliders.Update(state.AgentTypeCounts, state.Agents.Count);
+            consumption.Update(state.TotalMagicJuice);
         }
 
         const int ModalWidth = 344;

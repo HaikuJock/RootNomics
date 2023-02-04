@@ -15,7 +15,7 @@ namespace RootNomicsGame.Simulation
         {
         }
 
-        internal void Initialize(IDictionary<string, int> agentTypeCount)
+        internal SimulationState Initialize(IDictionary<string, int> agentTypeCount)
         {
             // Create RootNomicEconomy
             // Create Markets
@@ -27,11 +27,22 @@ namespace RootNomicsGame.Simulation
 
             // Create DoranAndParberryEconomy - has some data in already
             economy = new DoranAndParberryEconomy();
+
+            return CalculateSimulationState();
         }
 
-        internal SimulationState Simulate(IDictionary<string, int> agentTypeCount, int magicJuiceForPlants)
+        internal SimulationState Simulate(IDictionary<string, int> agentTypeCounts, int magicJuiceForPlants)
         {
+            var market = economy.getMarket("default");
+            
+            market.enforceAgentTypeCounts(agentTypeCounts);
             economy.simulate(100);
+
+            return CalculateSimulationState();
+        }
+
+        private SimulationState CalculateSimulationState()
+        {
             var market = economy.getMarket("default");
             var allGoodsCounts = market.countAllGoods();
             var result = new SimulationState
@@ -41,14 +52,25 @@ namespace RootNomicsGame.Simulation
                 TotalMagicJuice = allGoodsCounts["tools"]
             };
 
+            var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
+
+            foreach (var type in typeIds)
+            {
+                result.AgentTypeCounts[type] = 0;
+            }
+            
             foreach (var agent in market._agents)
             {
-                result.Agents.Add(new Agent
+                if (typeIds.Contains(agent.className))
                 {
-                    Id = agent.id.ToString(),
-                    Type = agent.className,
-                    Wealth = (int)Math.Round(agent.money),
-                });
+                    result.Agents.Add(new Agent
+                    {
+                        Id = agent.id.ToString(),
+                        Type = agent.className,
+                        Wealth = (int)Math.Round(agent.money),
+                    });
+                    result.AgentTypeCounts[agent.className] = result.AgentTypeCounts[agent.className] + 1;
+                }
             }
 
             return result;

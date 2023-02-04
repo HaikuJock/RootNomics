@@ -52,6 +52,11 @@ namespace RootNomicsGame.UI
 
         internal Dictionary<string, int> GetValues() => consumptionSliders.GetValues();
 
-        internal void Update(int totalMagicJuice) => consumptionSliders.Update(totalMagicJuice);
+        static readonly Dictionary<string, int> typeCounts = new Dictionary<string, int>
+        {
+            { PlantHealingKey, 0 },
+            { PlayerHealingKey, 0 },
+        };
+        internal void Update(int totalMagicJuice) => consumptionSliders.Update(typeCounts, totalMagicJuice);
     }
 }

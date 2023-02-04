@@ -36,6 +36,7 @@ namespace RootNomicsGame.UI
         Label minLabel;
         Label maxLabel;
         Label valueLabel;
+        Layout minMaxLayout;
 
         internal LinkedSlider(string id, string name, int max)
             : base(new Rectangle(0, 0, Width, 44), Orientation.Vertical, 0, 0)
@@ -52,7 +53,7 @@ namespace RootNomicsGame.UI
             AddChild(nameLayout);
 
             var minMaxFrame = new Rectangle(0, 0, Width, 20);
-            var minMaxLayout = new FormLayout(minMaxFrame);
+            minMaxLayout = new FormLayout(minMaxFrame);
 
             minLabel = new Label("0");
             maxLabel = new Label(max.ToString());
@@ -116,6 +117,9 @@ namespace RootNomicsGame.UI
             var sliderFrame = new Rectangle(0, 0, Width, 22);
             slider = new OrdinalSlider(sliderFrame, 12, new Point(22, 22), 0, max);
             slider.OnChanged = OnCountChanged;
+            maxLabel.Text = max.ToString();
+            maxLabel.SizeToFit();
+            minMaxLayout.DoLayout();
 
             AddChild(slider);
         }

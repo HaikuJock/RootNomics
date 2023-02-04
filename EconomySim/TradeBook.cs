@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    class TradeBook
+    public class TradeBook
     {
 	    public Dictionary<String, List<Offer>> bids;
 	    public Dictionary<String, List<Offer>> asks;

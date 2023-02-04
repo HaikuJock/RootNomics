@@ -5,13 +5,13 @@ using System.Text;
 
 namespace EconomySim
 {
-/**
- * The most fundamental agent class, and has as little implementation as possible.
- * In most cases you should start by extending Agent instead of this.
- * @author larsiusprime
- */
+    /**
+     * The most fundamental agent class, and has as little implementation as possible.
+     * In most cases you should start by extending Agent instead of this.
+     * @author larsiusprime
+     */
 
-    class AgentData {
+    public class AgentData {
 	    public string className { get; set;}
 	    public double money;
 	    public InventoryData inventory;
@@ -28,7 +28,7 @@ namespace EconomySim
 
     }
 
-    class Point
+    public class Point
     {
         public double x;
         public double y;
@@ -40,7 +40,7 @@ namespace EconomySim
     }
 
 
-    class BasicAgent
+    public class BasicAgent
     {
 	    public int id;				//unique integer identifier
         public string className { get; set; }	//string identifier, "famer", "woodcutter", etc.

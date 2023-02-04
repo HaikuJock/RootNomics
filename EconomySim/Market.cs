@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace EconomySim
 {
-    interface ISignalBankrupt
+    public interface ISignalBankrupt
     {
         void signalBankrupt(Market m, BasicAgent agent);
     }
 
-    class Market
+    public class Market
     {
 	    public String name;
 

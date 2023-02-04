@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace EconomySim
 {
-    class DoranAndParberryEconomy : Economy
+    public class DoranAndParberryEconomy : Economy
     {
 
 	    public DoranAndParberryEconomy()

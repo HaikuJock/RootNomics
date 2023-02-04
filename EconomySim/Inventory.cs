@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    class Inventory
+    public class Inventory
     {
 	    public double maxSize = 0;
 

@@ -6,7 +6,7 @@ using System.Text;
 namespace EconomySim
 {
 
-    class Good
+    public class Good
     {
 	    public String id = "";		//string id of good
 	    public double size = 1.0;	//inventory size taken up

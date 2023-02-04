@@ -8,6 +8,7 @@
     <PackageReference Include="TextCopy" Version="1.7.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EconomySim\EconomySim.csproj" />
     <ProjectReference Include="..\Haiku.MonoGameUI\Haiku.MonoGameUI.csproj" />
     <ProjectReference Include="..\Haiku.UI\Haiku.UI.csproj" />
     <ProjectReference Include="..\Haiku\Haiku.csproj" />

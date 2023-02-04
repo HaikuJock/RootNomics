@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    class MarketData
+    public class MarketData
     {
 	    public List<Good> goods;
 	    public List<AgentData>agentTypes;

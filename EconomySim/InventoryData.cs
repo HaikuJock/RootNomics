@@ -5,10 +5,10 @@ using System.Text;
 
 namespace EconomySim
 {
- 
-/**
- */
-    class InventoryData
+
+    /**
+     */
+    public class InventoryData
     {
 	    public double maxSize;
 	    public Dictionary<String, double> ideal;

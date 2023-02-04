@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    class Economy : ISignalBankrupt
+    public class Economy : ISignalBankrupt
     {
 	    private List<Market> _markets;
 

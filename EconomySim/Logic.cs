@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    class Logic
+    public class Logic
     {
 	    private bool init = false;
 

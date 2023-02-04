@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    class MarketReport
+    public class MarketReport
     {
 	    public String strListGood = "";
 	    public String strListGoodPrices= "";

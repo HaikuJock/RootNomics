@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    class Offer
+    public class Offer
     {
 	    public String good;	//the thing offered
 	    public double units;			//how many units

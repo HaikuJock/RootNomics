@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EconomySim
 {
-    enum EconNoun
+    public enum EconNoun
     {
 	    Price,
 	    Ask,
@@ -14,7 +14,7 @@ namespace EconomySim
 	    Profit
     }
 
-    class HistoryLog
+    public class HistoryLog
     {
 	    EconNoun type;
 	    Dictionary<String,List<double>>log;
@@ -79,7 +79,7 @@ namespace EconomySim
 	    }
     }
 
-    class History
+    public class History
     {
 	    public HistoryLog prices;
 	    public HistoryLog asks;

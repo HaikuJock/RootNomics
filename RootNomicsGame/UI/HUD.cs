@@ -101,13 +101,13 @@ namespace RootNomicsGame.UI
 
             if (playerPanel.Health <= 0)
             {
-                ShowModalOptions("You passed on, your remains will decompose, sink into the earth and provide sustenance for the roots of the plants you so dearly love. Will your scion continue your legacy?",
+                ShowModalOptions(
+                    "You passed on. Your remains decompose into the earth, sustaining the roots of the plants you so dearly love. Will your scion continue your legacy?",
                     new ModalAction("Yes", restart), new ModalAction("No", quit));
             }
         }
 
         const int ModalWidth = 344;
-        const int ModalTextSpacing = 2;
         const int ModalPanelSpacing = 16;
         const int ModalPanelPadding = 8;
         const int ModalInset = 8;

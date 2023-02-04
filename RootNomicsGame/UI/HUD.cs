@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using TexturePackerLoader;
 
 namespace RootNomicsGame.UI
 {
@@ -20,7 +21,7 @@ namespace RootNomicsGame.UI
         readonly Simulator simulator;
         Layout content;
 
-        public HUD(Rectangle frame, AudioPlaying audio, Simulator simulator) 
+        public HUD(Rectangle frame, AudioPlaying audio, Simulator simulator, SpriteSheet uiTextureAtlas) 
             : base(frame, audio)
         {
             this.simulator = simulator;
@@ -40,7 +41,7 @@ namespace RootNomicsGame.UI
             content.AddChild(stats);
 
             var consumptionFrame = new Rectangle(statsFrame.Right + 16, 0, agentCountSliders.Frame.Width, agentCountSliders.Frame.Height);
-            consumption = new ConsumptionPanel(consumptionFrame);
+            consumption = new ConsumptionPanel(consumptionFrame, uiTextureAtlas);
 
             content.AddChild(consumption);
 

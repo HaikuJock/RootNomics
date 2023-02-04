@@ -77,7 +77,7 @@ namespace RootNomicsGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             userInterface.Pointer = UiSpriteSheet.Sprite(UITextureAtlas.IconPointer);
             screenSize = GraphicsDevice.Viewport.Bounds.Size;
-            hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator());
+            hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator(), UiSpriteSheet);
             userInterface.PushWindow(hud);
 
             // TODO: use this.Content to load your game content here
@@ -90,7 +90,7 @@ namespace RootNomicsGame
 
             if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.R))
             {
-                hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator());
+                hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator(), UiSpriteSheet);
                 userInterface.PopAllWindows();
                 userInterface.PushWindow(hud);
             }

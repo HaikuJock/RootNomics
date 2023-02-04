@@ -34,11 +34,12 @@ namespace RootNomicsGame.Simulation
             economy.simulate(1);
             var market = economy.getMarket("default");
             var allGoodsCounts = market.countAllGoods();
-            var result = new SimulationState();
-
-            result.TotalWealth = allGoodsCounts["wealth"];
-            result.TotalFood = allGoodsCounts["food"];
-            result.TotalMagicJuice = allGoodsCounts["tools"];
+            var result = new SimulationState
+            {
+                TotalWealth = allGoodsCounts["wealth"],
+                TotalFood = allGoodsCounts["food"],
+                TotalMagicJuice = allGoodsCounts["tools"]
+            };
 
             foreach (var agent in market._agents)
             {

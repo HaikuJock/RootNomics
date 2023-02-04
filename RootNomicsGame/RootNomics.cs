@@ -20,6 +20,7 @@ namespace RootNomicsGame
         internal SpriteSheet UiSpriteSheet { get; private set; }
         UserInterface userInterface;
         HUD hud;
+        Point screenSize;
         private readonly MousePressEventProviding mousePressEventProvider;
         private readonly BrowserOpening browserOpener;
         private readonly TextClipboarding clipboard;
@@ -55,10 +56,11 @@ namespace RootNomicsGame
             int h = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             graphicsManager.PreferredBackBufferWidth = w;   // 1768
             graphicsManager.PreferredBackBufferHeight = h; // 992
-            graphicsManager.IsFullScreen = true;
 #if DEBUG
+            graphicsManager.IsFullScreen = false;   // Otherwise when you hit a breakpoint, bad things happen
             graphicsManager.HardwareModeSwitch = false;
 #else
+            graphicsManager.IsFullScreen = true;
             graphicsManager.HardwareModeSwitch = true;
 #endif
             graphicsManager.ApplyChanges();
@@ -74,7 +76,7 @@ namespace RootNomicsGame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             userInterface.Pointer = UiSpriteSheet.Sprite(UITextureAtlas.IconPointer);
-            var screenSize = GraphicsDevice.Viewport.Bounds.Size;
+            screenSize = GraphicsDevice.Viewport.Bounds.Size;
             hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator());
             userInterface.PushWindow(hud);
 
@@ -86,6 +88,12 @@ namespace RootNomicsGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
                 Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.R))
+            {
+                hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator());
+                userInterface.PopAllWindows();
+                userInterface.PushWindow(hud);
+            }
             // TODO: Add your update logic here
             mousePressEventProvider.OnNewFrame(clipCursor: false);
 

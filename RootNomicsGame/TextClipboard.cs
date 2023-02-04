@@ -1,9 +1,9 @@
 using Haiku.MonoGameUI;
 using TextCopy;
 
-namespace RootNomics.Win
+namespace RootNomicsGame
 {
-    class TextClipboard : TextClipboarding
+    public class TextClipboard : TextClipboarding
     {
         public string GetText()
         {

@@ -10,11 +10,11 @@ using System.Xml;
 
 namespace RootNomicsGame.UI
 {
-    internal class AgentSlider : LinearLayout
+    internal class LinkedSlider : LinearLayout
     {
         public const int Width = 200;
 
-        public List<AgentSlider> Others {
+        public List<LinkedSlider> Others {
             get
             {
                 return others;
@@ -26,18 +26,18 @@ namespace RootNomicsGame.UI
             }
         }
         public Label TotalLabel { get; internal set; }
-        List<AgentSlider> others;
+        List<LinkedSlider> others;
         public int Value => slider?.Value ?? 0;
         readonly string id;
         readonly int max;
-        List<AgentSlider>.Enumerator othersIterator;
+        List<LinkedSlider>.Enumerator othersIterator;
         OrdinalSlider slider;
         Label nameLabel;
         Label minLabel;
         Label maxLabel;
         Label valueLabel;
 
-        internal AgentSlider(string id, string name, int max)
+        internal LinkedSlider(string id, string name, int max)
             : base(new Rectangle(0, 0, 200, 44), Orientation.Vertical, 0, 0)
         {
             this.id = id;

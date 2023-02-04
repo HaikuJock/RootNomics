@@ -15,19 +15,19 @@ namespace RootNomicsGame.UI
     {
         private readonly int total;
         Label totalCountLabel;
-        Dictionary<string, AgentSlider> sliders;
+        Dictionary<string, LinkedSlider> sliders;
         
         internal LinkedSliders(Rectangle frame, IDictionary<string, string> sliderTypeNames, int total)
             : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 8, 16, 16))
         {
             BackgroundColor = Color.MintCream;
 
-            sliders = new Dictionary<string, AgentSlider>();
+            sliders = new Dictionary<string, LinkedSlider>();
             foreach (var typeNames in sliderTypeNames)
             {
                 var id = typeNames.Key;
                 var name = typeNames.Value;
-                var slider = new AgentSlider(id, name, total);
+                var slider = new LinkedSlider(id, name, total);
 
                 sliders[id] = slider;
             }

@@ -1,4 +1,5 @@
-﻿using Haiku.MonoGameUI;
+﻿using Haiku.MathExtensions;
+using Haiku.MonoGameUI;
 using Haiku.MonoGameUI.Layouts;
 using Haiku.MonoGameUI.LayoutStrategies;
 using Microsoft.Xna.Framework;
@@ -13,6 +14,7 @@ namespace RootNomicsGame.UI
     internal class PlayerPanel : Panel
     {
         Label healthLabel;
+        internal int Health { get; private set; }
 
         public PlayerPanel(Rectangle frame)
             : base(frame, new FlexLayoutStrategy(new Flex
@@ -25,10 +27,18 @@ namespace RootNomicsGame.UI
             BackgroundColor = Color.Tomato;
 
             var healthTitle = new Label("Health:", BodyFont);
-            healthLabel = new Label("100");
+            Health = 100;
+            healthLabel = new Label(Health.ToString());
 
             AddChild(healthTitle);
             AddChild(healthLabel);
+        }
+
+        internal void Update(int damage)
+        {
+            Health -= damage;
+            Health = Health.Clamp(0, 100);
+            healthLabel.Text = Health.ToString();
         }
     }
 }

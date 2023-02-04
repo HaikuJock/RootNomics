@@ -1,4 +1,5 @@
 ﻿using Haiku.Audio;
+using Haiku.MathExtensions;
 using Haiku.MonoGameUI;
 using Haiku.MonoGameUI.Layouts;
 using Microsoft.Xna.Framework;
@@ -10,6 +11,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using TexturePackerLoader;
+using TexturePackerMonoGameDefinitions;
 
 namespace RootNomicsGame.UI
 {
@@ -21,11 +23,32 @@ namespace RootNomicsGame.UI
         PlayerPanel playerPanel;
         readonly Simulator simulator;
         Layout topContent;
+        double damageMin;
+        double damageMax;
+        Random random;
+        UserInterface ui;
+        SpriteSheet uiTextureAtlas;
+        private readonly Action restart;
+        private readonly Action quit;
 
-        public HUD(Rectangle frame, AudioPlaying audio, Simulator simulator, SpriteSheet uiTextureAtlas) 
+        public HUD(
+            Rectangle frame,
+            UserInterface ui,
+            AudioPlaying audio,
+            Simulator simulator,
+            SpriteSheet uiTextureAtlas,
+            Action restart,
+            Action quit) 
             : base(frame, audio)
         {
             this.simulator = simulator;
+            this.ui = ui;
+            this.uiTextureAtlas = uiTextureAtlas;
+            this.restart = restart;
+            this.quit = quit;
+            damageMin = 0.01;
+            damageMax = 0.02;
+            random = new Random();
 
             topContent = new LinearLayout(Orientation.Horizontal, 16, 16);
 
@@ -66,6 +89,114 @@ namespace RootNomicsGame.UI
             stats.Update(state);
             agentCountSliders.Update(state.Agents.Count);
             consumption.Update(state.TotalMagicJuice);
+
+            damageMin *= 2;
+            damageMax *= 2;
+            var damage = damageMin + random.NextDouble() * (damageMax - damageMin);
+            int actualDamage = (int)Math.Round(damage);
+            actualDamage -= healing[ConsumptionPanel.PlayerHealingKey];
+            actualDamage = actualDamage.Clamp(-100, 100);
+
+            playerPanel.Update(actualDamage);
+
+            if (playerPanel.Health <= 0)
+            {
+                ShowModalOptions("You passed on, your remains will decompose, sink into the earth and provide sustenance for the roots of the plants you so dearly love. Will your scion continue your legacy?",
+                    new ModalAction("Yes", restart), new ModalAction("No", quit));
+            }
+        }
+
+        const int ModalWidth = 344;
+        const int ModalTextSpacing = 2;
+        const int ModalPanelSpacing = 16;
+        const int ModalPanelPadding = 8;
+        const int ModalInset = 8;
+        const int ButtonHeight = 44;
+
+        public void ShowModalOptions(string message, params ModalAction[] modalActions)
+        {
+            LinearLayout dialog = CreateModalOptions(message, modalActions);
+
+            ShowDialog(dialog);
+        }
+
+        public LinearLayout CreateModalOptions(string message, params ModalAction[] modalActions)
+        {
+            LinearLayout dialog = new LinearLayout(Rectangle.Empty, Orientation.Vertical, ModalPanelSpacing, ModalPanelPadding);
+
+            AddMessage(dialog, message);
+            AddOptionButtons(dialog, modalActions, (ModalAction option) => option.Action());
+
+            return dialog;
+        }
+
+        void AddMessage(Layout dialog, string message)
+        {
+            var messageLayout = LinearLayout.ForText(message, BodyFont, ModalWidth);
+
+            dialog.AddChild(messageLayout);
+            messageLayout.CenterXInParent();
+        }
+
+        Layout AddOptionButtons(Layout dialog, ModalAction[] modalActions, Action<ModalAction> onButtonPress)
+        {
+            LinearLayout optionsLayout = new LinearLayout(Rectangle.Empty, Orientation.Horizontal, ModalPanelSpacing, ModalPanelPadding);
+            var availableOptionWidth = ModalWidth - ModalPanelSpacing * (modalActions.Length - 1) - ModalPanelPadding * 2;
+            var optionWidth = availableOptionWidth / modalActions.Length;
+
+            foreach (var option in modalActions)
+            {
+                Button button = new Button(new Rectangle(0, 0, optionWidth, ButtonHeight), (_) =>
+                {
+                    ui.PopWindow();
+                    onButtonPress(option);
+                }, option.Title)
+                {
+                    IsFocusable = true
+                };
+                button.SetBackground(
+                    uiTextureAtlas.NinePatch(UITextureAtlas.ButtonNormal),
+                    uiTextureAtlas.NinePatch(UITextureAtlas.ButtonActive),
+                    uiTextureAtlas.NinePatch(UITextureAtlas.ButtonSelected));
+                optionsLayout.AddChild(button);
+            }
+
+            dialog.AddChild(optionsLayout);
+
+            return optionsLayout;
+        }
+
+        public void ShowDialog(LinearLayout dialog)
+        {
+            ShowDialog(dialog, UITextureAtlas.ModalBackgroundDestructive);
+        }
+
+        void ShowDialog(LinearLayout dialog, string spriteName)
+        {
+            Panel overlay = new Panel(Frame);
+            overlay.BackgroundColor = Color.Black * 0.75f;
+            Panel dialogBackground = new Panel()
+            {
+                Texture = uiTextureAtlas.TiledObliqueNinePatch(spriteName, 22, 14),
+            };
+
+            dialogBackground.Frame = new Rectangle(
+                dialog.Frame.X - ModalInset,
+                dialog.Frame.Y - ModalInset,
+                SpriteSheet.SizeForObliqueTiled(dialog.Frame.Width + ModalInset * 2, 22, 14),
+                SpriteSheet.SizeForObliqueTiled(dialog.Frame.Height + ModalInset * 2, 22, 14));
+            dialog.Frame = new Rectangle(ModalInset, ModalInset, dialog.Frame.Width, dialog.Frame.Height);
+
+            dialogBackground.AddChild(dialog);
+            dialog.CenterInParent();
+            overlay.AddChild(dialogBackground);
+            dialogBackground.CenterXInParent();
+            dialogBackground.CenterYInParent();
+
+            var window = new Window(Frame, audio);
+
+            window.AddChild(overlay);
+            ui.PushWindow(window);
         }
     }
 }

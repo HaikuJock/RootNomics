@@ -77,8 +77,7 @@ namespace RootNomicsGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             userInterface.Pointer = UiSpriteSheet.Sprite(UITextureAtlas.IconPointer);
             screenSize = GraphicsDevice.Viewport.Bounds.Size;
-            hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator(), UiSpriteSheet);
-            userInterface.PushWindow(hud);
+            RestartGame();
 
             // TODO: use this.Content to load your game content here
         }
@@ -90,15 +89,27 @@ namespace RootNomicsGame
 
             if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.R))
             {
-                hud = new HUD(new Rectangle(Point.Zero, screenSize), audio, new Simulator(), UiSpriteSheet);
-                userInterface.PopAllWindows();
-                userInterface.PushWindow(hud);
+                RestartGame();
             }
             // TODO: Add your update logic here
             mousePressEventProvider.OnNewFrame(clipCursor: false);
 
             base.Update(gameTime);
             userInterface.PostUpdate();
+        }
+
+        void RestartGame()
+        {
+            userInterface.PopAllWindows();
+            hud = new HUD(
+                new Rectangle(Point.Zero, screenSize),
+                userInterface,
+                audio,
+                new Simulator(),
+                UiSpriteSheet,
+                RestartGame,
+                Exit);
+            userInterface.PushWindow(hud);
         }
 
         protected override void Draw(GameTime gameTime)

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace RootNomicsGame.UI
 {
@@ -24,6 +25,7 @@ namespace RootNomicsGame.UI
                 othersIterator = others.GetEnumerator();
             }
         }
+        public Label TotalLabel { get; internal set; }
         List<AgentSlider> others;
         public int Value => slider?.Value ?? 0;
         readonly string id;
@@ -40,8 +42,14 @@ namespace RootNomicsGame.UI
         {
             this.id = id;
             this.max = max;
+            var nameLayout = new LinearLayout(Orientation.Horizontal, 4);
+            
             nameLabel = new Label(name, BodyFont);
-            AddChild(nameLabel);
+            nameLayout.AddChild(nameLabel);
+            valueLabel = new Label((0).ToString());
+            nameLayout.AddChild(valueLabel);
+            valueLabel.CenterYInParent();
+            AddChild(nameLayout);
 
             var minMaxFrame = new Rectangle(0, 0, Width, 20);
             var minMaxLayout = new FormLayout(minMaxFrame);
@@ -56,10 +64,6 @@ namespace RootNomicsGame.UI
             slider.OnChanged = SetAgentCount;
 
             AddChild(slider);
-
-            valueLabel = new Label((0).ToString());
-            AddChild(valueLabel);
-            valueLabel.CenterXInParent();
             SetValue(0);
         }
 
@@ -72,7 +76,6 @@ namespace RootNomicsGame.UI
         private void SetValueLabel(int value)
         {
             valueLabel.Text = value.ToString();
-            valueLabel.CenterXInParent();
         }
 
         void SetAgentCount(int value)
@@ -100,6 +103,8 @@ namespace RootNomicsGame.UI
                     othersIterator = others.GetEnumerator();
                 }
             }
+            var available = max - total;
+            TotalLabel.Text = $"Available: {available}";
             SetValueLabel(value);
         }
 

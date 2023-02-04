@@ -13,16 +13,16 @@ namespace RootNomicsGame.UI
 {
     internal class AgentCountSliders : Panel
     {
+        private readonly int totalAgents;
+        Label totalAgentCountLabel;
         Dictionary<string, AgentSlider> sliders;
         
         internal AgentCountSliders(Rectangle frame, IDictionary<string, string> agentTypeNames, int totalAgents)
-            : base(frame)
+            : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 8, 16, 16))
         {
             BackgroundColor = Color.MintCream;
 
             sliders = new Dictionary<string, AgentSlider>();
-            var slidersFrame = new Rectangle(16, 0, 200, 200);
-            var slidersContainer = new LinearLayout(slidersFrame, Orientation.Vertical, 0, 16);
             foreach (var typeNames in agentTypeNames)
             {
                 var id = typeNames.Key;
@@ -32,13 +32,15 @@ namespace RootNomicsGame.UI
                 sliders[id] = slider;
             }
 
+            totalAgentCountLabel = new Label($"Available: {totalAgents}", BodyFont);
             foreach (var slider in sliders.Values)
             {
                 slider.Others = sliders.Values.Except(new[] { slider }).ToList();
+                slider.TotalLabel = totalAgentCountLabel;
             }
-            slidersContainer.AddChildren(sliders.Values);
-            AddChild(slidersContainer);
-            Frame = new Rectangle(frame.Left, frame.Top, frame.Width, slidersContainer.Frame.Height);
+            AddChild(totalAgentCountLabel);
+            AddChildren(sliders.Values);
+            this.totalAgents = totalAgents;
         }
 
         internal void SetValues(Dictionary<string, int> values)
@@ -51,6 +53,8 @@ namespace RootNomicsGame.UI
 
                 slider.SetValue(count);
             }
+            var available = totalAgents - values.Values.Sum();
+            totalAgentCountLabel.Text = $"Available: {available}";
         }
     }
 }

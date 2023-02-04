@@ -71,9 +71,61 @@ namespace EconomySim
 		    newAgent.init(this);
 	    }
 
-        public void enforceAgentTypeCounts(IDictionary<string, int> agentTypeCounts)
+        public void enforceAgentTypeCounts(IDictionary<string, int> agentTypeCounts, Func<AgentData, BasicAgent> getAgent)
         {
+			var agentsToReEmploy = new List<BasicAgent>();
+			var countsToReEmployTo = new Dictionary<string, int>();
 
+			foreach (var agentTypeCount in agentTypeCounts)
+			{
+				var agentType = agentTypeCount.Key;
+				var count = agentTypeCount.Value;
+				var agentsOfType = _agents.Where(a => a.className == agentType);
+				var diff = agentsOfType.Count() - count;
+
+                if (diff > 0)
+				{
+					agentsToReEmploy.AddRange(agentsOfType.Take(diff));
+				}
+				else if (diff < 0)
+				{
+					countsToReEmployTo[agentType] = -diff;
+                }
+			}
+
+			var dontReEmployFromTypes = countsToReEmployTo.Keys.ToList();
+
+			foreach (var reEmployToTypeCount in countsToReEmployTo)
+			{
+				var reEmployToType = reEmployToTypeCount.Key;
+				var reEmployCount = reEmployToTypeCount.Value;
+
+				while (reEmployCount > 0)
+				{
+					BasicAgent? agentToReEmploy = null;
+
+					if (agentsToReEmploy.Count > 0)
+					{
+						agentToReEmploy = agentsToReEmploy[0];
+						agentsToReEmploy.RemoveAt(0);
+                    }
+					else
+					{
+						agentToReEmploy = _agents.FirstOrDefault(a => !dontReEmployFromTypes.Contains(a.className));
+                    }
+
+					if (agentToReEmploy == null)
+					{
+						Console.WriteLine("Nah mate");
+					}
+					else
+					{
+                        var newAgent = getAgent(getAgentClass(reEmployToType));
+                        replaceAgent(agentToReEmploy, newAgent);
+						--reEmployCount;
+                    }
+                }
+			}
         }
 
         //@:access(bazaarbot.agent.BasicAgent)    //dfs stub ????

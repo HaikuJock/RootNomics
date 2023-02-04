@@ -45,6 +45,9 @@ namespace EconomySim
 		    //no implemenation -- provide your own in a subclass
 	    }
 
-    }
+		public virtual void enforceAgentTypeCounts(string marketName, IDictionary<string, int> agentTypeCounts)
+		{
+		}
+	}
 
 }

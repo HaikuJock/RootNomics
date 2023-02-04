@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,9 +34,15 @@ namespace RootNomicsGame.Simulation
 
         internal SimulationState Simulate(IDictionary<string, int> agentTypeCounts, int magicJuiceForPlants)
         {
-            var market = economy.getMarket("default");
-            
-            market.enforceAgentTypeCounts(agentTypeCounts);
+            economy.enforceAgentTypeCounts("default", agentTypeCounts);
+            //var state = CalculateSimulationState();
+            //var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
+
+            //foreach (var type in typeIds)
+            //{
+            //    System.Diagnostics.Debug.WriteLine($"{type}: {state.AgentTypeCounts[type]}");
+            //}
+
             economy.simulate(200);
 
             return CalculateSimulationState();

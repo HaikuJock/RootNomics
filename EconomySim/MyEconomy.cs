@@ -176,12 +176,21 @@ namespace EconomySim
             return res;
 	    }
 
-	    /**
+        public override void enforceAgentTypeCounts(string marketName, IDictionary<string, int> agentTypeCounts)
+        {
+            var market = getMarket(marketName);
+            if (market != null)
+            {
+                market.enforceAgentTypeCounts(agentTypeCounts, getAgent);
+            }
+        }
+
+        /**
 	     * Find the agent class that has the most of a given good
 	     * @param	good
 	     * @return
 	     */
-	    /*
+        /*
 	    public function getAgentClassWithMost(good:String):String
 	    {
 		    var amount:Float = 0;

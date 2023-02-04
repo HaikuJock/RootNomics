@@ -61,7 +61,7 @@ namespace RootNomicsGame.UI
 
             var sliderFrame = new Rectangle(0, 0, 200, 22);
             slider = new OrdinalSlider(sliderFrame, 12, new Point(22, 22), 0, max);
-            slider.OnChanged = SetAgentCount;
+            slider.OnChanged = OnCountChanged;
 
             AddChild(slider);
             SetValue(0);
@@ -78,7 +78,7 @@ namespace RootNomicsGame.UI
             valueLabel.Text = value.ToString();
         }
 
-        void SetAgentCount(int value)
+        void OnCountChanged(int value)
         {
             var total = Others.Sum(s => s.Value) + value;
 

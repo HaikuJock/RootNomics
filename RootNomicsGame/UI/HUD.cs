@@ -18,36 +18,42 @@ namespace RootNomicsGame.UI
         LinkedSliders agentCountSliders;
         StatsPanel stats;
         ConsumptionPanel consumption;
+        PlayerPanel playerPanel;
         readonly Simulator simulator;
-        Layout content;
+        Layout topContent;
 
         public HUD(Rectangle frame, AudioPlaying audio, Simulator simulator, SpriteSheet uiTextureAtlas) 
             : base(frame, audio)
         {
             this.simulator = simulator;
 
-            content = new LinearLayout(Orientation.Horizontal, 16, 16);
+            topContent = new LinearLayout(Orientation.Horizontal, 16, 16);
 
             var slidersFrame = new Rectangle(0, 0, frame.Width, Math.Min(500, (int)(frame.Height * 0.26667f)));
             var totalCount = Configuration.InitialAgentTypeCount.Values.Sum(val => val);
             agentCountSliders = new LinkedSliders(slidersFrame, Configuration.AgentTypeNames, totalCount);
 
-            content.AddChild(agentCountSliders);
+            topContent.AddChild(agentCountSliders);
             agentCountSliders.SetValues(Configuration.InitialAgentTypeCount);
 
             var statsFrame = new Rectangle(agentCountSliders.Frame.Right + 16, 0, frame.Width - 2 * (agentCountSliders.Frame.Right + 16), 44);
             stats = new StatsPanel(statsFrame);
 
-            content.AddChild(stats);
+            topContent.AddChild(stats);
 
             var consumptionFrame = new Rectangle(statsFrame.Right + 16, 0, agentCountSliders.Frame.Width, agentCountSliders.Frame.Height);
             consumption = new ConsumptionPanel(consumptionFrame, uiTextureAtlas);
 
-            content.AddChild(consumption);
+            topContent.AddChild(consumption);
 
             consumption.GrowButton.Action += EndTurn;
             simulator.Initialize(Configuration.InitialAgentTypeCount);
-            AddChild(content);
+            AddChild(topContent);
+
+            var playerFrame = new Rectangle(0, frame.Height - 60 - 32, 200, 60);
+            playerPanel = new PlayerPanel(playerFrame);
+            AddChild(playerPanel);
+            playerPanel.CenterXInParent();
         }
 
         void EndTurn(object button)

@@ -23,14 +23,13 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Haiku.MonoGameUI\Haiku.MonoGameUI.csproj" />
     <ProjectReference Include="..\RootNomicsGame\RootNomicsGame.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Content\Content.mgcb" Link="Content\Content.mgcb" />
+    <MonoGameContentReference Include="..\Content\Content.mgcb" Link="Content\Content.mgcb" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

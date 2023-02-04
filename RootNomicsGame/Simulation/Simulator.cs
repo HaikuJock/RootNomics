@@ -31,7 +31,7 @@ namespace RootNomicsGame.Simulation
 
         internal SimulationState Simulate(IDictionary<string, int> agentTypeCount, int magicJuiceForPlants)
         {
-            economy.simulate(1);
+            economy.simulate(100);
             var market = economy.getMarket("default");
             var allGoodsCounts = market.countAllGoods();
             var result = new SimulationState

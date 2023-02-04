@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>monogame</string>
         <key>textureFileName</key>
-        <filename>../RootNomicsGame/Content/UITextureAtlas.png</filename>
+        <filename>../Content/UITextureAtlas.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrQualityLevel</key>
@@ -129,7 +129,7 @@
             <key>datafile</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../RootNomicsGame/Content/UITextureAtlas.txt</filename>
+                <filename>../Content/UITextureAtlas.txt</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -391,6 +391,21 @@
                 <rect>4,4,8,8</rect>
                 <key>scale9Paddings</key>
                 <rect>4,4,8,8</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">UI/ModalBackgroundDestructive.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>14,14,29,29</rect>
+                <key>scale9Paddings</key>
+                <rect>14,14,29,29</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

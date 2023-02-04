@@ -4,8 +4,8 @@
 # To learn how to import these sprites into your MonoGame project visit:
 # https://www.codeandweb.com/texturepacker/monogame
 #
-# Sprite sheet: UITextureAtlas.png (60 x 224)
-# $TexturePacker:SmartUpdate:ac3ac1883bb0b02259ef217599ba4608:8a0461b78bd4753810c67c2b2e219d57:ab4ed61aee9c20e10cf08a931d1d0a05$
+# Sprite sheet: UITextureAtlas.png (60 x 284)
+# $TexturePacker:SmartUpdate:4a131d4bfde4f2ded807ec09e1c8018f:a24bae1cdef3fff0a9c6b34ac614c6ea:ab4ed61aee9c20e10cf08a931d1d0a05$
 #
 
 BackgroundTopBar;0;1;12;11;11;11;11;0.5;0.5
@@ -36,6 +36,7 @@ IconScrollBarUp;0;1;72;16;12;16;12;0.5;0.5
 IconScrollBarUpActive;0;19;72;16;12;16;12;0.5;0.5
 IconScrollBarUpSelected;0;37;72;16;12;16;12;0.5;0.5
 MissingIcon;0;1;109;16;16;16;16;0.5;0.5
+ModalBackgroundDestructive;0;1;225;57;57;57;57;0.5;0.5
 ScrollBarBackground;0;38;109;17;17;17;17;0.5;0.5
 ShadowBottom;0;1;1;5;5;5;5;0.5;0.5
 ShadowLeftAndCorners;0;33;12;11;11;11;11;0.5;0.5

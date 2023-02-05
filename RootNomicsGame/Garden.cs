@@ -72,7 +72,15 @@ namespace RootNomicsGame
         private GroundTiles groundTiles;
         private PlantModels fernModels;
 
-        private SimulationRenderer simulationRenderer = new SimulationRenderer();
+        private SimulationRenderer simulationRenderer = new SimulationRenderer(new List<string>
+        {
+            "farmer",
+            "worker",
+            "blacksmith",
+            "miner",
+            "refiner",
+            "woodcutter"
+        });
 
         public Garden(Game game, UserInterface userInterface)
             :base(game)

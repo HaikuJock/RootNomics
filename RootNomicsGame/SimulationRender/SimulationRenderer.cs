@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using RootNomics.Environment;
+using RootNomicsGame.Simulation;
 
 /*
  * previously
@@ -21,7 +22,7 @@ namespace RootNomics.SimulationRender
         private GroundTiles groundTiles;
         private List<AgentRenderingModel> models = new List<AgentRenderingModel>();
 
-        public SimulationRenderer()
+        public SimulationRenderer(List<string> agentModelNames)
         {
         }
 
@@ -56,10 +57,10 @@ namespace RootNomics.SimulationRender
             return modelsLookup[modelName];
         }
 
+        public void Update(List<Agent> agents)
+        {
 
-
-
-
+        }
     }
 }
 

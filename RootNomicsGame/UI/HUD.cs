@@ -103,10 +103,23 @@ namespace RootNomicsGame.UI
 
             playerPanel.Update(actualDamage, DamageMin, DamageMax);
 
-            if (playerPanel.Health <= 0)
+            if (playerPanel.Health <= 0
+                && state.TotalWealth <= 0)
+            {
+                ShowModalOptions(
+    "Disaster! You passed on and all your plants are dead. Your family is left destitute, your remains thrown to the dogs and your scion sold to the poorhouse.",
+    new ModalAction("Noooooo!!!", quit));
+            }
+            else if (playerPanel.Health <= 0)
             {
                 ShowModalOptions(
                     "You passed on. Your remains decompose into the earth, sustaining the roots of the plants you so dearly love. Will your scion continue your legacy?",
+                    new ModalAction("Yes", restart), new ModalAction("No", quit));
+            }
+            else if (state.TotalWealth <= 0)
+            {
+                ShowModalOptions(
+                    "All your plants have died. Try again?",
                     new ModalAction("Yes", restart), new ModalAction("No", quit));
             }
         }

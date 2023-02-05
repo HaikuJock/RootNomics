@@ -17,9 +17,9 @@ namespace RootNomicsGame
 
         internal static readonly Dictionary<string, int> InitialAgentTypeCount = new Dictionary<string, int>
         {
-            { "woodcutter", 3 },
-            { "farmer", 3 },
-            { "blacksmith", 3 },
+            { "woodcutter", 5 },
+            { "farmer", 5 },
+            { "blacksmith", 5 },
         };
     }
 }

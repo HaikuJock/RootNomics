@@ -36,7 +36,7 @@ namespace RootNomicsGame.Simulation
             state.TotalMagicJuice = random.Next(10, 100);
 
             var agentCount = random.Next(0, 100);
-            var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
+            var typeIds = Configuration.AgentTypeNames.Keys.ToList();
 
             foreach (var type in typeIds)
             {

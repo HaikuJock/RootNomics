@@ -16,7 +16,7 @@ namespace RootNomicsGame.Simulation
         {
         }
 
-        internal SimulationState Initialize(IDictionary<string, int> agentTypeCount)
+        internal SimulationState Initialize(IDictionary<string, int> agentTypeCounts)
         {
             // Create RootNomicEconomy
             // Create Markets
@@ -28,6 +28,7 @@ namespace RootNomicsGame.Simulation
 
             // Create DoranAndParberryEconomy - has some data in already
             economy = new DoranAndParberryEconomy();
+            economy.enforceAgentTypeCounts("default", agentTypeCounts);
 
             return CalculateSimulationState();
         }
@@ -70,7 +71,7 @@ namespace RootNomicsGame.Simulation
                 TotalMagicJuice = allGoodsCounts["tools"]
             };
 
-            var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();
+            var typeIds = Configuration.AgentTypeNames.Keys.ToList();
 
             foreach (var type in typeIds)
             {

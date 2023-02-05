@@ -62,7 +62,7 @@ namespace EconomySim
             var has_food = food >= 1;
             var has_metal = metal >= 1;
 
-            //_consume(agent, "money", 0.5);//cost of living/business
+            _consume(agent, "money", 0.5);//cost of living/business
             _consume(agent, "food", 1);//cost of living
 
             if (has_food && has_metal & need_tools)
@@ -97,7 +97,7 @@ namespace EconomySim
             var has_tools = tools >= 1;
             var has_work = work >= 1;
 
-            //_consume(agent, "money", 0.5);//cost of living/business
+            _consume(agent, "money", 0.5);//cost of living/business
 
             if (need_food)
             {
@@ -143,7 +143,7 @@ namespace EconomySim
             var has_food = food >= 1;
             var has_tools = tools >= 1;
 
-            //_consume(agent, "money", 0.5);//cost of living/business
+            _consume(agent, "money", 0.5);//cost of living/business
             _consume(agent, "food", 1);//cost of living
 
             if (has_food && need_ore)
@@ -189,7 +189,7 @@ namespace EconomySim
             var has_tools = tools >= 1;
             var has_ore = ore >= 1;
 
-            //_consume(agent, "money", 0.5);//cost of living/business
+            _consume(agent, "money", 0.5);//cost of living/business
             _consume(agent, "food", 1);//cost of living
 
             if (has_food && has_ore && need_metal)
@@ -236,7 +236,7 @@ namespace EconomySim
             var has_food = food >= 1;
             var has_tools = tools >= 1;
 
-            //_consume(agent, "money", 0.5);//cost of living/business
+            _consume(agent, "money", 0.5);//cost of living/business
             _consume(agent, "food", 1);//cost of living
 
             if (has_food && need_wood)
@@ -277,7 +277,7 @@ namespace EconomySim
             var need_work = work < 1;
 
             _consume(agent, "food", 1);
-            //_consume(agent, "money", 0.5);//cost of living/business
+            _consume(agent, "money", 0.5);//cost of living/business
 
             if (need_work)
             {

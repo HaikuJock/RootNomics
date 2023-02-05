@@ -36,14 +36,40 @@ namespace RootNomicsGame.UI
 
         internal Dictionary<string, int> GetValues() => consumptionSliders.GetValues();
 
-        static readonly Dictionary<string, int> typeCounts = new Dictionary<string, int>
-        {
-            { PlantHealingKey, 0 },
-            { PlayerHealingKey, 0 },
-        };
-
         internal void Update(int totalMagicJuice)
         {
+            var currentHealingValues = consumptionSliders.GetValues();
+
+            // Maintain ratio of healing values given new total
+            var currentTotal = (double)currentHealingValues.Values.Sum();
+
+            var newPlant = 0;
+            var newPlayer = 0;
+
+            if (currentTotal > 0)
+            {
+                var plantRatio = currentHealingValues[PlantHealingKey] / currentTotal;
+                var playerRatio = currentHealingValues[PlayerHealingKey] / currentTotal;
+                var newTotal = (double)totalMagicJuice;
+
+                newPlant = (int)Math.Round(newTotal * plantRatio);
+                newPlayer = (int)Math.Round(newTotal * playerRatio);
+                while (newPlant + newPlayer > totalMagicJuice)
+                {
+                    --newPlayer;
+                    if (newPlant + newPlayer > totalMagicJuice)
+                    {
+                        --newPlant;
+                    }
+                }
+            }
+
+            var typeCounts = new Dictionary<string, int>
+            {
+                { PlantHealingKey, newPlant },
+                { PlayerHealingKey, newPlayer },
+            };
+
             consumptionSliders.Update(typeCounts, totalMagicJuice);
         }
     }

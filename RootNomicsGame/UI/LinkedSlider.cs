@@ -13,6 +13,8 @@ namespace RootNomicsGame.UI
 {
     internal class LinkedSlider : LinearLayout
     {
+        internal static LinkedSlider PlayerHealSlider = null;
+
         public const int Width = 200;
 
         public List<LinkedSlider> Others {
@@ -43,6 +45,10 @@ namespace RootNomicsGame.UI
             : base(new Rectangle(0, 0, Width, 44), Orientation.Vertical, 0, 0)
         {
             this.id = id;
+            if (id == ConsumptionPanel.PlayerHealingKey)
+            {
+                PlayerHealSlider = this;
+            }
             this.max = max;
             var nameLayout = new LinearLayout(Orientation.Horizontal, 4);
             

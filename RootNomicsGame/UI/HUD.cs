@@ -1,8 +1,10 @@
-﻿using Haiku.Audio;
+﻿using Haiku;
+using Haiku.Audio;
 using Haiku.MathExtensions;
 using Haiku.MonoGameUI;
 using Haiku.MonoGameUI.Layouts;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json.Linq;
 using RootNomicsGame.Simulation;
 using System;
 using System.Collections.Generic;
@@ -28,6 +30,7 @@ namespace RootNomicsGame.UI
         double damageMax;
         internal int DamageMin => (int)Math.Round(damageMin);
         internal int DamageMax => (int)Math.Round(damageMax);
+        int turnCount;
         Random random;
         UserInterface ui;
         SpriteSheet uiTextureAtlas;
@@ -100,27 +103,47 @@ namespace RootNomicsGame.UI
 
             damageMin *= 0.95 + random.NextDouble();
             damageMax *= 0.95 + random.NextDouble();
+            if (damageMin > damageMax)
+            {
+                var swap = damageMax;
+                damageMax = damageMin;
+                damageMin = swap;
+            }
 
-            playerPanel.Update(actualDamage, DamageMin, DamageMax);
+            var min = Math.Max(0, DamageMin - LinkedSlider.PlayerHealSlider.Value);
+            var max = Math.Max(0, DamageMax - LinkedSlider.PlayerHealSlider.Value);
+
+            playerPanel.Update(actualDamage, min, max);
 
             if (playerPanel.Health <= 0
                 && state.TotalWealth <= 0)
             {
-                ShowModalOptions(
+                ShowBadModalOptions(
     "Disaster! You passed on and all your plants are dead. Your family is left destitute, your remains thrown to the dogs and your scion sold to the poorhouse.",
     new ModalAction("Noooooo!!!", quit));
             }
             else if (playerPanel.Health <= 0)
             {
-                ShowModalOptions(
+                ShowBadModalOptions(
                     "You passed on. Your remains decompose into the earth, sustaining the roots of the plants you so dearly love. Will your scion continue your legacy?",
                     new ModalAction("Yes", restart), new ModalAction("No", quit));
             }
             else if (state.TotalWealth <= 0)
             {
-                ShowModalOptions(
+                ShowBadModalOptions(
                     "All your plants have died. Try again?",
                     new ModalAction("Yes", restart), new ModalAction("No", quit));
+            }
+            else
+            {
+                ++turnCount;
+                Log.Debug("Turn Count: " + turnCount.ToString());
+                if (turnCount > 17)
+                {
+                    ShowModalOptions(
+    "Congratulations! You cheated death and your garden is the talk of the town! Relive the glory?",
+    new ModalAction("Yes", restart), new ModalAction("No", quit));
+                }
             }
         }
 
@@ -141,7 +164,14 @@ namespace RootNomicsGame.UI
         {
             LinearLayout dialog = CreateModalOptions(message, modalActions);
 
-            ShowDialog(dialog);
+            ShowDialog(dialog, UITextureAtlas.ModalBackground);
+        }
+
+        public void ShowBadModalOptions(string message, params ModalAction[] modalActions)
+        {
+            LinearLayout dialog = CreateModalOptions(message, modalActions);
+
+            ShowDialog(dialog, UITextureAtlas.ModalBackgroundDestructive);
         }
 
         public LinearLayout CreateModalOptions(string message, params ModalAction[] modalActions)
@@ -188,11 +218,6 @@ namespace RootNomicsGame.UI
             dialog.AddChild(optionsLayout);
 
             return optionsLayout;
-        }
-
-        public void ShowDialog(LinearLayout dialog)
-        {
-            ShowDialog(dialog, UITextureAtlas.ModalBackgroundDestructive);
         }
 
         void ShowDialog(LinearLayout dialog, string spriteName)

@@ -45,6 +45,8 @@ namespace RootNomicsGame
             Content.RootDirectory = "Content";
             mousePressEventProvider.Initialize(this);
             userInterface = new UserInterface(this, mousePressEventProvider, browserOpener, clipboard, audio);
+            userInterface.DrawOrder = 1;
+            userInterface.UpdateOrder = 0;
             Components.Add(userInterface);
             garden = new Garden(this, userInterface);
             Components.Add(garden);

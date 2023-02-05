@@ -41,7 +41,7 @@ namespace RootNomicsGame.UI
             var currentHealingValues = consumptionSliders.GetValues();
 
             // Maintain ratio of healing values given new total
-            var currentTotal = (double)currentHealingValues.Values.Sum();
+            var currentTotal = (double)consumptionSliders.Total;
 
             var newPlant = 0;
             var newPlayer = 0;

@@ -13,6 +13,7 @@ namespace RootNomicsGame.UI
 {
     internal class LinkedSliders : Panel
     {
+        public int Total => total;
         int total;
         Label totalCountLabel;
         Dictionary<string, LinkedSlider> sliders;

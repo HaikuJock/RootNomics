@@ -121,6 +121,7 @@ namespace EconomySim
 					else
 					{
                         var newAgent = getAgent(getAgentClass(reEmployToType));
+                        newAgent.money = agentToReEmploy.money;   // keep existing money instead of artificially injecting more money
                         replaceAgent(agentToReEmploy, newAgent);
 						--reEmployCount;
                     }

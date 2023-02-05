@@ -135,6 +135,7 @@ namespace EconomySim
 		    }
 
 		    var newAgent = getAgent(market.getAgentClass(bestClass));
+            newAgent.money = agent.money;   // inherit existing money instead of artificially injecting more money
 		    market.replaceAgent(agent, newAgent);
 	    }
 

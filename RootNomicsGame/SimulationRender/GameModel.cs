@@ -8,7 +8,7 @@ namespace RootNomics.SimulationRender
     class GameModel
     {
         private string modelName;
-        private Model model;
+        public Model model;
 
         private Vector3 modelScaling = new Vector3(1, 1, 1);
         private Vector3 modelTranslation = new Vector3(0, 0, 0);

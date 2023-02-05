@@ -59,6 +59,8 @@ namespace RootNomicsGame.Simulation
                 state.AgentTypeCounts[type] = state.AgentTypeCounts[type] +1;
             }
 
+
+
             return state;
         }
     }

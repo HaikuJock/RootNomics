@@ -1,4 +1,5 @@
 ﻿using EconomySim;
+using RootNomics.SimulationRender;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,15 @@ namespace RootNomicsGame.Simulation
         {
         }
 
+        public static SimulationRenderer simulationRenderer;
+
         internal SimulationState Initialize(IDictionary<string, int> agentTypeCounts)
         {
+
+            simulationRenderer.Reset();
+
+            // simulationRenderer = new SimulationRenderer();
+
             // Create RootNomicEconomy
             // Create Markets
             // Add Markets to RootNomicEconomy
@@ -61,7 +69,9 @@ namespace RootNomicsGame.Simulation
 
             economy.simulate(60);
 
-            return CalculateSimulationState();
+            SimulationState simulationState = CalculateSimulationState();
+            simulationRenderer.Update(simulationState.Agents);
+            return simulationState;
         }
 
         private SimulationState CalculateSimulationState()
@@ -81,7 +91,7 @@ namespace RootNomicsGame.Simulation
             {
                 result.AgentTypeCounts[type] = 0;
             }
-            
+
             foreach (var agent in market._agents)
             {
                 if (typeIds.Contains(agent.className))
@@ -95,6 +105,7 @@ namespace RootNomicsGame.Simulation
                     result.AgentTypeCounts[agent.className] = result.AgentTypeCounts[agent.className] + 1;
                 }
             }
+
 
             return result;
         }

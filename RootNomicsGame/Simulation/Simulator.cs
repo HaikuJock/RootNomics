@@ -10,6 +10,8 @@ namespace RootNomicsGame.Simulation
 {
     internal class Simulator
     {
+        public static readonly int PlantHealingFactor = 37;
+
         Economy economy;
 
         internal Simulator()
@@ -40,7 +42,7 @@ namespace RootNomicsGame.Simulation
             if (healingForPlants > 0)
             {
                 // add money to the economy
-                market.addMoney(healingForPlants);
+                market.addMoney(healingForPlants * PlantHealingFactor);
             }
             if (healingForPlayer > 0)
             {

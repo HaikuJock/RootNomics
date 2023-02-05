@@ -1,6 +1,7 @@
 ﻿using Haiku.MonoGameUI;
 using Haiku.MonoGameUI.Layouts;
 using Microsoft.Xna.Framework;
+using RootNomicsGame.Simulation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,12 @@ namespace RootNomicsGame.UI
 
         private void SetValueLabel(int value)
         {
-            valueLabel.Text = value.ToString();
+            var visibleValue = value;
+            if (id == ConsumptionPanel.PlantHealingKey)
+            {
+                visibleValue *= Simulator.PlantHealingFactor;
+            }
+            valueLabel.Text = visibleValue.ToString();
         }
 
         void OnCountChanged(int value)
@@ -117,7 +123,14 @@ namespace RootNomicsGame.UI
             var sliderFrame = new Rectangle(0, 0, Width, 22);
             slider = new OrdinalSlider(sliderFrame, 12, new Point(22, 22), 0, max);
             slider.OnChanged = OnCountChanged;
-            maxLabel.Text = max.ToString();
+
+            var visibleMax = max;
+            if (id == ConsumptionPanel.PlantHealingKey)
+            {
+                visibleMax *= Simulator.PlantHealingFactor;
+            }
+
+            maxLabel.Text = visibleMax.ToString();
             maxLabel.SizeToFit();
             minMaxLayout.DoLayout();
 

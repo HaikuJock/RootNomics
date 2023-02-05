@@ -46,8 +46,8 @@ namespace RootNomicsGame.UI
             this.uiTextureAtlas = uiTextureAtlas;
             this.restart = restart;
             this.quit = quit;
-            damageMin = 0.01;
-            damageMax = 0.02;
+            damageMin = 0.1;
+            damageMax = 0.2;
             random = new Random();
 
             topContent = new LinearLayout(Orientation.Horizontal, 16, 16);
@@ -69,12 +69,12 @@ namespace RootNomicsGame.UI
 
             topContent.AddChild(consumption);
 
-            consumption.GrowButton.Action += EndTurn;
             var state = simulator.Initialize(Configuration.InitialAgentTypeCount);
             AddChild(topContent);
 
-            var playerFrame = new Rectangle(0, frame.Height - 60 - 32, 200, 60);
-            playerPanel = new PlayerPanel(playerFrame);
+            var playerFrame = new Rectangle(0, frame.Height - 60 - 32, 520, 60);
+            playerPanel = new PlayerPanel(playerFrame, uiTextureAtlas);
+            playerPanel.GrowButton.Action += EndTurn;
             AddChild(playerPanel);
             playerPanel.CenterXInParent();
             UpdateFromSimulationState(state);
@@ -89,14 +89,15 @@ namespace RootNomicsGame.UI
 
             UpdateFromSimulationState(state);
 
-            damageMin *= 2;
-            damageMax *= 2;
             var damage = damageMin + random.NextDouble() * (damageMax - damageMin);
             int actualDamage = (int)Math.Round(damage);
             actualDamage -= healing[ConsumptionPanel.PlayerHealingKey];
             actualDamage = actualDamage.Clamp(-100, 100);
 
-            playerPanel.Update(actualDamage);
+            damageMin *= 0.95 + random.NextDouble();
+            damageMax *= 0.95 + random.NextDouble();
+
+            playerPanel.Update(actualDamage, damageMin, damageMax);
 
             if (playerPanel.Health <= 0)
             {

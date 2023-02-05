@@ -216,54 +216,31 @@ namespace RootNomicsGame
             Matrix world = cameraTransforms.worldMatrix;
             Matrix view = cameraTransforms.viewMatrix;
             Matrix projection = cameraTransforms.projectionMatrix;
-            //GraphicsDevice.Clear(CLEAR_COLOR);
+            simulationRenderer.GetGameModel("acaciaTree1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-5, 6, 0));
+            simulationRenderer.GetGameModel("acaciaTree2").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-5, 8, 0));
+            simulationRenderer.GetGameModel("birchTree1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, -8, 0));
+            simulationRenderer.GetGameModel("birchTree2").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, -6, 0));
+            simulationRenderer.GetGameModel("cactus1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, -4, 0));
+            simulationRenderer.GetGameModel("cactus2").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, -2, 0));
+            simulationRenderer.GetGameModel("fern1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 0, 0));
+            simulationRenderer.GetGameModel("fern2").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 2, 0));
+            simulationRenderer.GetGameModel("flower1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 2, 0));
+            simulationRenderer.GetGameModel("flower2").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 2, 0));
+            simulationRenderer.GetGameModel("flower3").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 2, 0));
+            simulationRenderer.GetGameModel("flower4").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 2, 0));
+            simulationRenderer.GetGameModel("mushroom1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 2, 0));
+            simulationRenderer.GetGameModel("mushroom2").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 4, 0));
+            simulationRenderer.GetGameModel("mushroom3").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 6, 0));
+            simulationRenderer.GetGameModel("mushroom4").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 8, 0));
+            simulationRenderer.GetGameModel("mushroom5").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-8, 10, 0));
+            simulationRenderer.GetGameModel("mushroom6").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-4, -8, 0));
+            simulationRenderer.GetGameModel("pineTree1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-4, -6, 0));
+            simulationRenderer.GetGameModel("pineTree2").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-4, -4, 0));
+            simulationRenderer.GetGameModel("smallPlant1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-4, -2, 0));
+            simulationRenderer.GetGameModel("plant1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-4, 0, 0));
+            simulationRenderer.GetGameModel("reeds1").DrawModelWithDefaultValues(cameraTransforms, ModelTransforms.Translation(-4, 2, 0));
 
 
-            /*
-            // -- render game components
-            // DrawModel2(spaceshipModel, world, view, projection);
-            // DrawModel2(modelCubeWedge0, world, view, projection);
-            // DrawModel2(modelCubeWedge1, world, view, projection);
-
-            // DrawModel2(fern1Model, world, view, projection);
-            // DrawModel2(plant3Model, world, view, projection);
-            // DrawModel2(plant4Model, world, view, projection);
-            // DrawModel2(plant5Model, world, view, projection);
-            // DrawModel2(spaceshipModel, world, view, projection);
-            DrawModelTranslationAndColor(modelAcaciaTree1, world, view, projection, 2, 7.3f, 0, new Vector3(0, 0.4f, 0), scaleX: 0.4f, scaleY: 0.4f, scaleZ: 0.4f, rot: 40);
-            DrawModelTranslationAndColor(modelAcaciaTree1, world, view, projection, 4.5f, 8.6f, 0, new Vector3(0, 0.4f, 0), scaleX: 0.5f, scaleY: 0.5f, scaleZ: 0.5f);
-            // -- models to work with
-            DrawModelTranslationAndColor(modelCactus1, world, view, projection, 4, 3, 0, new Vector3(0, 0.4f, 0), scaleX: 1f, scaleY: 1f, scaleZ: 1.5f);
-            DrawModelTranslationAndColor(modelCactus1, world, view, projection, 4.4f, 2.6f, 0, new Vector3(0, 0.4f, 0), scaleX: 0.5f, scaleY: 0.5f, scaleZ: 0.7f);
-            DrawModelTranslationAndColor(modelCactus2, world, view, projection, 3.4f, 4.6f, 0, new Vector3(0, 0.4f, 0), scaleX: 1.5f, scaleY: 1.5f, scaleZ: 1.7f);
-            DrawModelTranslationAndColor(modelReeds1, world, view, projection, -2.4f, 4.6f, 0, new Vector3(0, 0.4f, 0), scaleX: 2.5f, scaleY: 2.5f, scaleZ: 3.7f);
-            DrawModelTranslationAndColor(modelTombstone, world, view, projection, -5.4f, -6.6f, 0, new Vector3(0, 0.4f, 0.5f), scaleX: 1.2f, scaleY: 1.2f, scaleZ: 1.2f, rot: 30);
-            DrawModelTranslationAndColor(modelBirchTree1, world, view, projection, -4.4f, -3.6f, 0, new Vector3(0, 0.4f, 0.5f), scaleX: 1.2f, scaleY: 1.2f, scaleZ: 1.2f, rot: 30);
-            DrawModelTranslationAndColor(modelTerrain1, world, view, projection, -10f, -10f, -0.4f, new Vector3(0, 0.4f, 0.5f), scaleX: 0.5f, scaleY: 0.5f, scaleZ: 0.1f, rot: 0);
-            //DrawModelTranslationAndColor(modelTerrain1, world, view, projection, 0f, 10f, -0.4f, new Vector3(0, 0.4f, 0.5f), scaleX: 0.5f, scaleY: 0.5f, scaleZ: 0.1f, rot: 0);
-            //DrawModelTranslationAndColor(modelTerrain1, world, view, projection, 0f, 0f, -0.4f, new Vector3(0, 0.4f, 0.5f), scaleX: 0.5f, scaleY: 0.5f, scaleZ: 0.1f, rot: 0);
-            //DrawModelTranslationAndColor(modelTerrain1, world, view, projection, 10f, 0f, -0.4f, new Vector3(0, 0.4f, 0.5f), scaleX: 0.5f, scaleY: 0.5f, scaleZ: 0.1f, rot: 0);
-            // DrawModel2(cactus1Model, world, view, projection);
-            DrawModelTranslationAndColor(modelMushroom1, world, view, projection, 4.4f, 1f, 0, new Vector3(0, 0.4f, 0), scaleX: 1.2f, scaleY: 1.2f, scaleZ: 1.2f);
-            DrawModelTranslationAndColor(modelMushroom2, world, view, projection, 4.7f, 1f, 0, new Vector3(0, 0.4f, 0), scaleX: 1.2f, scaleY: 1.2f, scaleZ: 1.2f);
-            DrawModelTranslationAndColor(modelMushroom3, world, view, projection, 3.7f, 3.1f, 0, new Vector3(0, 0.4f, 0), scaleX: 1.2f, scaleY: 1.2f, scaleZ: 1.2f);
-            DrawModelTranslationAndColor(modelMushroom4, world, view, projection, 2.7f, 1.5f, 0, new Vector3(0, 0.4f, 0), scaleX: 1.2f, scaleY: 1.2f, scaleZ: 1.2f);
-
-            DrawModelTranslationAndColor(modelSmallPlant1, world, view, projection, 4.7f, -3.5f, 0, new Vector3(0, 0.4f, 0), scaleX: 2.5f, scaleY: 2.5f, scaleZ: 2.5f);
-
-            DrawModelTranslationAndColor(modelFlower1, world, view, projection, 5.37f, -4.5f, 0, new Vector3(0, 0.4f, 0), scaleX: 2f, scaleY: 2f, scaleZ: 2f);
-            */
-
-
-
-
-
-
-
-            // -- Game simulation
-
-
-            // DrawModelTranslationAndColor(modelUnitSquare, world, view, projection, 0, 0, 0f, new Vector3(0, 0.4f, 0), scaleX: 50f, scaleY: 50f);
 
             if (SHOW_AXIS)
             {

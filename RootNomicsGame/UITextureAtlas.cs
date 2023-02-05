@@ -4,7 +4,7 @@
  * Contains references to each image within the sprite sheet.
  *
  * https://www.codeandweb.com/texturepacker
- * $TexturePacker:SmartUpdate:d2ac2025e85c3dd00d5dec2c4f159486:457618e407a6c68d3e77190ab64ae72b:ab4ed61aee9c20e10cf08a931d1d0a05$
+ * $TexturePacker:SmartUpdate:072121cd77a2567ff6cebc620955790c:13b88d71364d4106add9fd03e80eef33:ab4ed61aee9c20e10cf08a931d1d0a05$
  *
  */
 namespace TexturePackerMonoGameDefinitions
@@ -16,6 +16,9 @@ namespace TexturePackerMonoGameDefinitions
 		public const string ButtonCheckBoxActive = "ButtonCheckBoxActive";
 		public const string ButtonNormal = "ButtonNormal";
 		public const string ButtonPullDown = "ButtonPullDown";
+		public const string ButtonRedActive = "ButtonRedActive";
+		public const string ButtonRedNormal = "ButtonRedNormal";
+		public const string ButtonRedSelected = "ButtonRedSelected";
 		public const string ButtonSelected = "ButtonSelected";
 		public const string CellActive = "CellActive";
 		public const string CellNormal = "CellNormal";
@@ -23,6 +26,10 @@ namespace TexturePackerMonoGameDefinitions
 		public const string DualSliderTrackLeft = "DualSliderTrackLeft";
 		public const string DualSliderTrackMiddle = "DualSliderTrackMiddle";
 		public const string IconCheck = "IconCheck";
+		public const string IconLeafDarkBackground = "IconLeafDarkBackground";
+		public const string IconLeafDarkBackground2 = "IconLeafDarkBackground2";
+		public const string IconLeafLightBackground = "IconLeafLightBackground";
+		public const string IconLeafLightBackground2 = "IconLeafLightBackground2";
 		public const string IconMinus = "IconMinus";
 		public const string IconPlus = "IconPlus";
 		public const string IconPointer = "IconPointer";
@@ -38,6 +45,8 @@ namespace TexturePackerMonoGameDefinitions
 		public const string IconScrollBarUp = "IconScrollBarUp";
 		public const string IconScrollBarUpActive = "IconScrollBarUpActive";
 		public const string IconScrollBarUpSelected = "IconScrollBarUpSelected";
+		public const string IconWreathBottomRight = "IconWreathBottomRight";
+		public const string IconWreathTopLeft = "IconWreathTopLeft";
 		public const string MissingIcon = "MissingIcon";
 		public const string ModalBackground = "ModalBackground";
 		public const string ModalBackgroundDestructive = "ModalBackgroundDestructive";

@@ -25,6 +25,7 @@ namespace RootNomicsGame
         private readonly BrowserOpening browserOpener;
         private readonly TextClipboarding clipboard;
         private readonly AudioPlaying audio;
+        Garden garden;
 
         public RootNomics()
         {
@@ -45,6 +46,8 @@ namespace RootNomicsGame
             mousePressEventProvider.Initialize(this);
             userInterface = new UserInterface(this, mousePressEventProvider, browserOpener, clipboard, audio);
             Components.Add(userInterface);
+            garden = new Garden(this);
+            Components.Add(garden);
             // Robb: Add your component here: e.g.
             // Components.Add(garden);
             IsMouseVisible = true;

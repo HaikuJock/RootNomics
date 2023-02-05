@@ -138,7 +138,7 @@ namespace RootNomicsGame.UI
             {
                 ++turnCount;
                 Log.Debug("Turn Count: " + turnCount.ToString());
-                if (turnCount > 17)
+                if (turnCount > 16)
                 {
                     ShowModalOptions(
     "Congratulations! You cheated death and your garden is the talk of the town! Relive the glory?",

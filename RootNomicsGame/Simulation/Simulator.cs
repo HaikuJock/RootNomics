@@ -10,9 +10,9 @@ namespace RootNomicsGame.Simulation
 {
     internal class Simulator
     {
-        public static readonly int PlantHealingFactor = 37;
+        public static int PlantHealingFactor = 3;
 
-        Economy economy;
+        DoranAndParberryEconomy economy;
 
         internal Simulator()
         {
@@ -43,11 +43,13 @@ namespace RootNomicsGame.Simulation
             {
                 // add money to the economy
                 market.addMoney(healingForPlants * PlantHealingFactor);
+                economy.Funds = healingForPlants * PlantHealingFactor;
             }
             if (healingForPlayer > 0)
             {
                 // remove tools from the economy
                 market.removeGood("tools", healingForPlayer);
+                market.taxTheRich(healingForPlayer);
             }
             //var state = CalculateSimulationState();
             //var typeIds = Configuration.InitialAgentTypeCount.Keys.ToList();

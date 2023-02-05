@@ -48,7 +48,7 @@ namespace RootNomicsGame.UI
         internal void Update(SimulationState state)
         {
             foodLabel.Text = state.TotalFood.ToString();
-            wealthLabel.Text = state.TotalWealth.ToString();
+            wealthLabel.Text = Math.Max(0, state.TotalWealth).ToString();
             juiceLabel.Text = state.TotalMagicJuice.ToString();
         }
     }

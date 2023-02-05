@@ -10,6 +10,7 @@ namespace EconomySim
 {
     public class DoranAndParberryEconomy : Economy
     {
+        public double Funds { get; set; } = 0;
 
 	    public DoranAndParberryEconomy()
 	    {
@@ -135,7 +136,23 @@ namespace EconomySim
 		    }
 
 		    var newAgent = getAgent(market.getAgentClass(bestClass));
-            newAgent.money = agent.money;   // inherit existing money instead of artificially injecting more money
+            //newAgent.money = agent.money;   // inherit existing money instead of artificially injecting more money
+            // except this agent has no money, that's why we're here
+            // too much money going into the system
+            //newAgent.money /= 4.0;
+            if (Funds > 0)
+            {
+                var inheritedDebt = agent.money;    // -ve or zero
+                var inheritedMoney = newAgent.money + inheritedDebt;
+                var funding = Math.Min(inheritedMoney, Funds);
+
+                newAgent.money = funding;
+                Funds -= funding;
+            }
+            else
+            {
+                newAgent.money = agent.money;
+            }
 		    market.replaceAgent(agent, newAgent);
 	    }
 

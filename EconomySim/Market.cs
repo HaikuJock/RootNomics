@@ -453,6 +453,30 @@ namespace EconomySim
 			}
         }
 
+        public void taxTheRich(int amount)
+        {
+            var random = new Random();
+			var agentsWithMoney = _agents.Where(a => a.money > 1).ToList();
+            var totalMoney = (int)Math.Floor(agentsWithMoney.Select(a => a.money).Sum());
+			var reduction = Math.Min(totalMoney, amount);
+
+            while (reduction > 0)
+            {
+                var index = random.Next(0, agentsWithMoney.Count);
+                var agent = agentsWithMoney[index];
+
+				if (agent.money > 1)
+				{
+                    agent.money += 1;
+                    reduction -= 1;
+                }
+				else
+				{
+					agentsWithMoney.RemoveAt(index);
+                }
+            }
+        }
+
         public void removeGood(string goodType, int amount)
         {
 			var agentsWithGood = _agents.Where(agent => agent.queryInventory(goodType) > 0).ToList();

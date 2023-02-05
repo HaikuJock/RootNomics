@@ -3,6 +3,7 @@ using Haiku.Audio;
 using Haiku.MathExtensions;
 using Haiku.MonoGameUI;
 using Haiku.MonoGameUI.Layouts;
+using Haiku.MonoGameUI.LayoutStrategies;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json.Linq;
 using RootNomicsGame.Simulation;
@@ -14,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TexturePackerLoader;
 using TexturePackerMonoGameDefinitions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RootNomicsGame.UI
 {
@@ -119,19 +121,19 @@ namespace RootNomicsGame.UI
                 && state.TotalWealth <= 0)
             {
                 ShowBadModalOptions(
-    "Disaster! You passed on and all your plants are dead. Your family is left destitute, your remains thrown to the dogs and your scion sold to the poorhouse.",
+    "Disaster!\n\n You passed on and all your plants are dead. Your family is left destitute, your remains thrown to the dogs and your scion sold to the poorhouse.\n\n",
     new ModalAction("Noooooo!!!", quit));
             }
             else if (playerPanel.Health <= 0)
             {
                 ShowBadModalOptions(
-                    "You passed on. Your remains decompose into the earth, sustaining the roots of the plants you so dearly love. Will your scion continue your legacy?",
+                    "You passed on.\n\n Your remains decompose into the earth, sustaining the roots of the plants you so dearly love.\n\n Will your scion continue your legacy?\n\n",
                     new ModalAction("Yes", restart), new ModalAction("No", quit));
             }
             else if (state.TotalWealth <= 0)
             {
                 ShowBadModalOptions(
-                    "All your plants have died. Try again?",
+                    "All your plants have died.\n\n Try again?\n\n",
                     new ModalAction("Yes", restart), new ModalAction("No", quit));
             }
             else
@@ -141,7 +143,7 @@ namespace RootNomicsGame.UI
                 if (turnCount > 16)
                 {
                     ShowModalOptions(
-    "Congratulations! You cheated death and your garden is the talk of the town! Relive the glory?",
+    "Congratulations!\n\n You cheated death and your garden is the talk of the town!\n\n Relive the glory?\n\n",
     new ModalAction("Yes", restart), new ModalAction("No", quit));
                 }
             }
@@ -164,7 +166,25 @@ namespace RootNomicsGame.UI
         {
             LinearLayout dialog = CreateModalOptions(message, modalActions);
 
-            ShowDialog(dialog, UITextureAtlas.ModalBackground);
+            var containerFrame = new Rectangle(0, 0, 1080, 768);
+            var topLeftFrame = new Rectangle(0, 0, 327, 356);
+            var bottomRightFrame = new Rectangle(1080 - 327, 768 - 356, 327, 356);
+
+            var container = new Layout(containerFrame);
+            var topLeft = new Panel(topLeftFrame)
+            {
+                Texture = uiTextureAtlas.Sprite(UITextureAtlas.IconWreathTopLeft),
+            };
+            var bottomRight = new Panel(bottomRightFrame)
+            {
+                Texture = uiTextureAtlas.Sprite(UITextureAtlas.IconWreathBottomRight),
+            };
+
+            container.AddChild(topLeft);
+            container.AddChild(bottomRight);
+            container.AddChild(dialog);
+            dialog.CenterInParent();
+            ShowDialog(container, UITextureAtlas.ModalBackground);
         }
 
         public void ShowBadModalOptions(string message, params ModalAction[] modalActions)
@@ -186,7 +206,7 @@ namespace RootNomicsGame.UI
 
         void AddMessage(Layout dialog, string message)
         {
-            var messageLayout = LinearLayout.ForText(message, BodyFont, ModalWidth);
+            var messageLayout = LinearLayout.ForText(message, HeadingFont, ModalWidth);
 
             dialog.AddChild(messageLayout);
             messageLayout.CenterXInParent();
@@ -197,6 +217,7 @@ namespace RootNomicsGame.UI
             LinearLayout optionsLayout = new LinearLayout(Rectangle.Empty, Orientation.Horizontal, ModalPanelSpacing, ModalPanelPadding);
             var availableOptionWidth = ModalWidth - ModalPanelSpacing * (modalActions.Length - 1) - ModalPanelPadding * 2;
             var optionWidth = availableOptionWidth / modalActions.Length;
+            var first = true;
 
             foreach (var option in modalActions)
             {
@@ -208,6 +229,34 @@ namespace RootNomicsGame.UI
                 {
                     IsFocusable = true
                 };
+                if (first)
+                {
+                    var foreground = new Panel(new Rectangle(), new LinearLayoutStrategy(Orientation.Horizontal, 16))
+                    {
+                        BackgroundColor = Color.Transparent,
+                    };
+                    var leaf = new Panel(new Rectangle(0, 0, 22, 28))
+                    {
+                        Texture = uiTextureAtlas.Sprite(UITextureAtlas.IconLeafLightBackground),
+                    };
+                    var stringSize = MainFont.MeasureString(option.Title);
+                    var width = (int)stringSize.X;
+                    var height = (int)stringSize.Y;
+                    var label = new Label(0, 0, (int)width, (int)height)
+                    {
+                        Font = MainFont,
+                        Text = option.Title,
+                        TextColor = Color.Black,
+                        BackgroundColor = Color.Transparent,
+                    };
+
+                    foreground.AddChildren(new Layout[] {leaf, label});
+                    label.CenterYInParent();
+                    button.SetForegroundPanel(foreground);
+                    foreground.CenterInParent();
+
+                    first = false;
+                }
                 button.SetBackground(
                     uiTextureAtlas.NinePatch(UITextureAtlas.ButtonNormal),
                     uiTextureAtlas.NinePatch(UITextureAtlas.ButtonActive),
@@ -220,13 +269,13 @@ namespace RootNomicsGame.UI
             return optionsLayout;
         }
 
-        void ShowDialog(LinearLayout dialog, string spriteName)
+        void ShowDialog(Layout dialog, string spriteName)
         {
             Panel overlay = new Panel(Frame);
-            overlay.BackgroundColor = Color.Black * 0.75f;
+            overlay.BackgroundColor = Color.Black * 0.85f;
             Panel dialogBackground = new Panel()
             {
-                Texture = uiTextureAtlas.TiledObliqueNinePatch(spriteName, 22, 14),
+                Texture = uiTextureAtlas.Sprite(spriteName),
             };
 
             dialogBackground.Frame = new Rectangle(

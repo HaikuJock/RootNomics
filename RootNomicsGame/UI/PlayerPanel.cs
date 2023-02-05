@@ -31,7 +31,7 @@ namespace RootNomicsGame.UI
             }))
         {
             Instance = this;
-            BackgroundColor = Color.Tomato;
+            BackgroundColor = new Color(0xF5F5DC);
 
             var healthTitle = new Label("Health:", BodyFont);
             Health = 100;
@@ -50,9 +50,9 @@ namespace RootNomicsGame.UI
 
             GrowButton = new Button();
             GrowButton.SetBackground(
-                uiTextureAtlas.NinePatch(UITextureAtlas.ButtonNormal),
-                uiTextureAtlas.NinePatch(UITextureAtlas.ButtonActive),
-                uiTextureAtlas.NinePatch(UITextureAtlas.ButtonSelected));
+                uiTextureAtlas.NinePatch(UITextureAtlas.ButtonRedNormal),
+                uiTextureAtlas.NinePatch(UITextureAtlas.ButtonRedActive),
+                uiTextureAtlas.NinePatch(UITextureAtlas.ButtonRedSelected));
             growLayout.AddChild(GrowButton);
             GrowButton.Frame = new Rectangle(0, 0, 112, 44);
             GrowButton.SetForeground("End Turn");

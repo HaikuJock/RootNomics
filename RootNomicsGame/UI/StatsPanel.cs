@@ -25,7 +25,7 @@ namespace RootNomicsGame.UI
                 ItemAlignment = ItemAlignment.Center,
             }))
         {
-            BackgroundColor = Color.WhiteSmoke;
+            BackgroundColor = new Color(0xF5F5DC);
 
             var foodLayout = new LinearLayout(Orientation.Horizontal, 4);
             var foodTitle = new Label("Nutrients:", BodyFont);

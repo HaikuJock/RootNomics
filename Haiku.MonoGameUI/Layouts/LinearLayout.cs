@@ -64,7 +64,8 @@ namespace Haiku.MonoGameUI.Layouts
         {
             var result = new List<Layout>();
             var lines = text.Split('\n');
-            float spaceWidth = font.MeasureString(" ").X;
+            var fontSize = font.MeasureString(" ");
+            float spaceWidth = fontSize.X;
 
             foreach (var line in lines)
             {
@@ -114,6 +115,12 @@ namespace Haiku.MonoGameUI.Layouts
                 {
                     result.Add(CreateLine(displayLine, font, width, alignment, labelCreator));
                 }
+                else
+                {
+                    var layout = CreateLine(displayLine, font, width, alignment, labelCreator);
+                    layout.Frame = new Rectangle(layout.Frame.X, layout.Frame.Y, layout.Frame.Width, (int)Math.Ceiling(fontSize.Y));
+                    result.Add(layout);
+                }
             }
 
             return result;
@@ -130,7 +137,8 @@ namespace Haiku.MonoGameUI.Layouts
             label.Text = displayLine;
             var lineLabel = new TextPanel(new Rectangle(0, 0, width, 0), label, alignment)
             {
-                Font = font
+                Font = font,
+                TextColor = new Color(0xF5F5DC),
             };
             lineLabel.SizeToFit();
 

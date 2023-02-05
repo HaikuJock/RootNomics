@@ -21,7 +21,7 @@ namespace RootNomicsGame.UI
         public ConsumptionPanel(Rectangle frame, SpriteSheet uiTextureAtlas)
             : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 8, 16))
         {
-            BackgroundColor = Color.AntiqueWhite;
+            BackgroundColor = new Color(0xF5F5DC);
 
             var slidersFrame = new Rectangle(0, 0, frame.Width, frame.Height);
             var consumption = new Dictionary<string, string>

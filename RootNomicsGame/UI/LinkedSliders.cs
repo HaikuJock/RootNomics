@@ -21,7 +21,7 @@ namespace RootNomicsGame.UI
         internal LinkedSliders(Rectangle frame, IDictionary<string, string> sliderTypeNames, int total)
             : base(frame, new LinearLayoutStrategy(Orientation.Vertical, 8, 16, 16))
         {
-            BackgroundColor = Color.MintCream;
+            BackgroundColor = new Color(0xF5F5DC);
 
             sliders = new Dictionary<string, LinkedSlider>();
             foreach (var typeNames in sliderTypeNames)

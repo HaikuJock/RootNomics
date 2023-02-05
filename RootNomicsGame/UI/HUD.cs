@@ -17,6 +17,7 @@ namespace RootNomicsGame.UI
 {
     internal class HUD : Window
     {
+        internal static HUD Instance;
         LinkedSliders agentCountSliders;
         StatsPanel stats;
         ConsumptionPanel consumption;
@@ -25,6 +26,8 @@ namespace RootNomicsGame.UI
         Layout topContent;
         double damageMin;
         double damageMax;
+        internal int DamageMin => (int)Math.Round(damageMin);
+        internal int DamageMax => (int)Math.Round(damageMax);
         Random random;
         UserInterface ui;
         SpriteSheet uiTextureAtlas;
@@ -41,6 +44,7 @@ namespace RootNomicsGame.UI
             Action quit) 
             : base(frame, audio)
         {
+            Instance = this;
             this.simulator = simulator;
             this.ui = ui;
             this.uiTextureAtlas = uiTextureAtlas;
@@ -97,7 +101,7 @@ namespace RootNomicsGame.UI
             damageMin *= 0.95 + random.NextDouble();
             damageMax *= 0.95 + random.NextDouble();
 
-            playerPanel.Update(actualDamage, damageMin, damageMax);
+            playerPanel.Update(actualDamage, DamageMin, DamageMax);
 
             if (playerPanel.Health <= 0)
             {

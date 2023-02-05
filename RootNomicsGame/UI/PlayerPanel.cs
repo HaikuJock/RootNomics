@@ -15,6 +15,7 @@ namespace RootNomicsGame.UI
 {
     internal class PlayerPanel : Panel
     {
+        internal static PlayerPanel Instance = null;
         Label healthLabel;
         internal int Health { get; private set; }
         internal Button GrowButton;
@@ -29,6 +30,7 @@ namespace RootNomicsGame.UI
                 ItemAlignment = ItemAlignment.Center,
             }))
         {
+            Instance = this;
             BackgroundColor = Color.Tomato;
 
             var healthTitle = new Label("Health:", BodyFont);
@@ -60,15 +62,17 @@ namespace RootNomicsGame.UI
             AddChild(growLayout);
         }
 
-        internal void Update(int damage, double damageMin, double damageMax)
+        internal void Update(int damage, int damageMin, int damageMax)
         {
             Health -= damage;
             Health = Health.Clamp(0, 100);
             healthLabel.Text = Health.ToString();
 
-            int min = (int)Math.Round(damageMin);
-            int max = (int)Math.Round(damageMax);
+            UpdateExpectedNextTurnDamage(damageMin, damageMax);
+        }
 
+        internal void UpdateExpectedNextTurnDamage(int min, int max)
+        {
             if (max == 0)
             {
                 expectedDamageLabel.Text = "0";

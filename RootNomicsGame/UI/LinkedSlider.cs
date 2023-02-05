@@ -72,7 +72,19 @@ namespace RootNomicsGame.UI
         public void SetValue(int value)
         {
             slider.SetValue(value);
+            SetValueInternal(value);
+        }
+
+        void SetValueInternal(int value)
+        {
             SetValueLabel(value);
+            if (id == ConsumptionPanel.PlayerHealingKey)
+            {
+                var min = Math.Max(0, HUD.Instance.DamageMin - value);
+                var max = Math.Max(0, HUD.Instance.DamageMax - value);
+
+                PlayerPanel.Instance?.UpdateExpectedNextTurnDamage(min, max);
+            }
         }
 
         private void SetValueLabel(int value)
@@ -112,7 +124,7 @@ namespace RootNomicsGame.UI
             }
             var available = max - total;
             TotalLabel.Text = $"Available: {available}";
-            SetValueLabel(value);
+            SetValueInternal(value);
         }
 
         internal void SetMax(int max)

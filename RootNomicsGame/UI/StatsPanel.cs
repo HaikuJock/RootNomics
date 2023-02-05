@@ -28,19 +28,22 @@ namespace RootNomicsGame.UI
             BackgroundColor = Color.WhiteSmoke;
 
             var foodLayout = new LinearLayout(Orientation.Horizontal, 4);
-            var foodTitle = new Label("Nutrients:");
+            var foodTitle = new Label("Nutrients:", BodyFont);
             foodLabel = new Label("0");
             foodLayout.AddChildren(new[] { foodTitle, foodLabel });
+            foodLabel.CenterYInParent();
 
             var wealthLayout = new LinearLayout(Orientation.Horizontal, 4);
-            var wealthTitle = new Label("Growth:");
+            var wealthTitle = new Label("Growth:", BodyFont);
             wealthLabel = new Label("0");
             wealthLayout.AddChildren(new[] { wealthTitle, wealthLabel });
+            wealthLabel.CenterYInParent();
 
             var juiceLayout = new LinearLayout(Orientation.Horizontal, 4);
-            var juiceTitle = new Label("Healing:");
+            var juiceTitle = new Label("Healing:", BodyFont);
             juiceLabel = new Label("0");
             juiceLayout.AddChildren(new[] { juiceTitle, juiceLabel });
+            juiceLabel.CenterYInParent();
 
             AddChildren(new[] {foodLayout, wealthLayout, juiceLayout});
         }

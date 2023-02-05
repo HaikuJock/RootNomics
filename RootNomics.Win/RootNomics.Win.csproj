@@ -26,10 +26,18 @@
     <ProjectReference Include="..\RootNomicsGame\RootNomicsGame.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
+    <Folder Include="Content\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="..\Content\Content.mgcb" Link="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Content\Fonts\Body.spritefont" Link="Content\Fonts\Body.spritefont" />
+    <None Include="..\Content\Fonts\Heading.spritefont" Link="Content\Fonts\Heading.spritefont" />
+    <None Include="..\Content\Fonts\Item.spritefont" Link="Content\Fonts\Item.spritefont" />
+    <None Include="..\Content\Fonts\Label.spritefont" Link="Content\Fonts\Label.spritefont" />
+    <None Include="..\Content\Fonts\Main.spritefont" Link="Content\Fonts\Main.spritefont" />
+    <None Include="..\Content\Fonts\Title.spritefont" Link="Content\Fonts\Title.spritefont" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />

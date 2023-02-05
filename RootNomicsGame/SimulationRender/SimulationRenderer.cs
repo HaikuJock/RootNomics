@@ -17,7 +17,7 @@ namespace RootNomics.SimulationRender
 {
     class SimulationRenderer
     {
-
+        private CameraTransforms cameraTransforms;
         private GroundTiles groundTiles;
         private List<AgentRenderingModel> models = new List<AgentRenderingModel>();
 
@@ -25,20 +25,38 @@ namespace RootNomics.SimulationRender
         {
         }
 
+        public void RegisterCameraTransforms(CameraTransforms cameraTransforms)
+        {
+            this.cameraTransforms = cameraTransforms;
+        }
+
         public void SetGroundTiles(GroundTiles groundTiles)
         {
             this.groundTiles = groundTiles;
         }
 
-        private Dictionary<string, GameModelRenderer> modelRegister = new();
+        private Dictionary<string, GameModel> modelsLookup = new();
 
         public void RegisterGameModel(string modelName, Model model)
         {
             // AgentRenderingModel agentRenderingModel = new AgentRenderingModel(model);
 
-            GameModelRenderer gameModelRenderer = new GameModelRenderer(model);
-            modelRegister.Add(modelName, gameModelRenderer);
+            GameModel gameModelRenderer = new GameModel(modelName, model);
+            modelsLookup.Add(modelName, gameModelRenderer);
         }
+
+
+        public void DrawGroundTiles()
+        {
+            groundTiles.DrawGroundTiles(cameraTransforms);
+        }
+
+        public GameModel GetGameModel(string modelName)
+        {
+            return modelsLookup[modelName];
+        }
+
+
 
 
 

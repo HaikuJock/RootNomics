@@ -68,7 +68,7 @@ namespace RootNomics.Environment
         }
 
 
-        public void DrawGroundTiles(CameraTransforms cameraTransform)
+        public void DrawGroundTiles(CameraTransforms cameraTransforms)
         {
             foreach (ModelMesh mesh in wedge0.Meshes)
             {
@@ -81,9 +81,9 @@ namespace RootNomics.Environment
                             BasicEffect basicEffect = (BasicEffect) effect;
                             CommonBasicEffects.SetEffectsDarker(basicEffect);
                             basicEffect.DiffuseColor = new Vector3(colors[i, j, 0].X, colors[i, j, 0].Y, colors[i, j, 0].Z);
-                            basicEffect.World = cameraTransform.worldMatrix;
-                            basicEffect.View = cameraTransform.viewMatrix;
-                            basicEffect.Projection = cameraTransform.projectionMatrix;
+                            basicEffect.World = cameraTransforms.worldMatrix;
+                            basicEffect.View = cameraTransforms.viewMatrix;
+                            basicEffect.Projection = cameraTransforms.projectionMatrix;
                             basicEffect.World = Matrix.Multiply(transforms[i, j], basicEffect.World);
                             mesh.Draw();
                         }
@@ -102,9 +102,9 @@ namespace RootNomics.Environment
                             BasicEffect basicEffect = (BasicEffect) effect;
                             CommonBasicEffects.SetEffectsDarker(basicEffect);
                             basicEffect.DiffuseColor = new Vector3(colors[i, j, 1].X, colors[i, j, 1].Y, colors[i, j, 1].Z);
-                            basicEffect.World = cameraTransform.worldMatrix;
-                            basicEffect.View = cameraTransform.viewMatrix;
-                            basicEffect.Projection = cameraTransform.projectionMatrix;
+                            basicEffect.World = cameraTransforms.worldMatrix;
+                            basicEffect.View = cameraTransforms.viewMatrix;
+                            basicEffect.Projection = cameraTransforms.projectionMatrix;
                             basicEffect.World = Matrix.Multiply(transforms[i, j], basicEffect.World);
                             mesh.Draw();
                         }

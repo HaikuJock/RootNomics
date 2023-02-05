@@ -14,6 +14,7 @@ using RootNomics.Primitives;
 using RootNomics.Environment;
 using RootNomics.SimulationRender;
 using RootNomics;
+using Haiku.MonoGameUI;
 
 namespace RootNomicsGame
 {
@@ -23,6 +24,8 @@ namespace RootNomicsGame
         // --
         public readonly static bool SHOW_AXIS = true;
         public readonly static bool RESTRICT_CAMERA = false;
+        private readonly UserInterface userInterface;
+
         // --
 
         private Color CLEAR_COLOR = Color.CornflowerBlue; // Using CornflowerBlue, Black, White
@@ -71,12 +74,13 @@ namespace RootNomicsGame
 
         private SimulationRenderer simulationRenderer = new SimulationRenderer();
 
-        public Garden(Game game)
+        public Garden(Game game, UserInterface userInterface)
             :base(game)
         {
             int screenWidth = game.Window.ClientBounds.Width;
             int screenHeight = game.Window.ClientBounds.Height;
             cameraTransforms = new CameraTransforms(screenWidth, screenHeight);
+            this.userInterface = userInterface;
         }
 
         protected override void LoadContent()
@@ -119,8 +123,31 @@ namespace RootNomicsGame
             groundTiles = new GroundTiles(modelCubeWedge0, modelCubeWedge1);
             simulationRenderer.SetGroundTiles(groundTiles);
 
+            simulationRenderer.RegisterCameraTransforms(cameraTransforms);
             simulationRenderer.RegisterGameModel("acaciaTree1", modelAcaciaTree1);
-
+            simulationRenderer.RegisterGameModel("acaciaTree2", modelAcaciaTree2);
+            simulationRenderer.RegisterGameModel("birchTree1", modelBirchTree1);
+            simulationRenderer.RegisterGameModel("birchTree2", modelBirchTree2);
+            simulationRenderer.RegisterGameModel("cactus1", modelCactus1);
+            simulationRenderer.RegisterGameModel("cactus2", modelCactus2);
+            simulationRenderer.RegisterGameModel("fern1", modelFern1);
+            simulationRenderer.RegisterGameModel("fern2", modelFern2);
+            simulationRenderer.RegisterGameModel("flower1", modelFlower1);
+            simulationRenderer.RegisterGameModel("flower2", modelFlower2);
+            simulationRenderer.RegisterGameModel("flower3", modelFlower3);
+            simulationRenderer.RegisterGameModel("flower4", modelFlower4);
+            simulationRenderer.RegisterGameModel("mushroom1", modelMushroom1);
+            simulationRenderer.RegisterGameModel("mushroom2", modelMushroom2);
+            simulationRenderer.RegisterGameModel("mushroom3", modelMushroom3);
+            simulationRenderer.RegisterGameModel("mushroom4", modelMushroom4);
+            simulationRenderer.RegisterGameModel("mushroom5", modelMushroom5);
+            simulationRenderer.RegisterGameModel("mushroom6", modelMushroom6);
+            simulationRenderer.RegisterGameModel("pineTree1", modelPineTree1);
+            simulationRenderer.RegisterGameModel("pineTree2", modelPineTree2);
+            simulationRenderer.RegisterGameModel("smallPlant1", modelSmallPlant1);
+            simulationRenderer.RegisterGameModel("plant1", modelPlant1);
+            simulationRenderer.RegisterGameModel("reeds1", modelReeds1);
+            simulationRenderer.RegisterGameModel("terrain1", modelTerrain1);
         }
 
         private int previousMouseScroll = 0;
@@ -141,40 +168,45 @@ namespace RootNomicsGame
                 Debug.WriteLine($"distance from origin {Vector3.Distance(cameraTransforms.cameraPosition, new Vector3(0, 0, 0))}");
             }
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (!userInterface.DidHandleMouseMove
+                && !userInterface.DidHandleMouseButtons)
             {
-                if (leftMouseIsReleased)
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                 {
-                    leftMouseIsReleased = false;
-                    mouseDragX = Mouse.GetState().X;
-                    mouseDragY = Mouse.GetState().Y;
+                    if (leftMouseIsReleased)
+                    {
+                        leftMouseIsReleased = false;
+                        mouseDragX = Mouse.GetState().X;
+                        mouseDragY = Mouse.GetState().Y;
+                    }
+                    else
+                    {
+                        float diffX = Mouse.GetState().X - mouseDragX;
+                        float diffY = Mouse.GetState().Y - mouseDragY;
+                        cameraTransforms.IncrementCameraOrbitDegrees(diffX / 4);
+                        cameraTransforms.OrbitUpDown(diffY / 20);
+                        mouseDragX = Mouse.GetState().X;
+                        mouseDragY = Mouse.GetState().Y;
+                    }
                 }
-                else
+                if (Mouse.GetState().LeftButton == ButtonState.Released)
                 {
-                    float diffX = Mouse.GetState().X - mouseDragX;
-                    float diffY = Mouse.GetState().Y - mouseDragY;
-                    cameraTransforms.IncrementCameraOrbitDegrees(diffX / 4);
-                    cameraTransforms.OrbitUpDown(diffY / 20);
-                    mouseDragX = Mouse.GetState().X;
-                    mouseDragY = Mouse.GetState().Y;
+                    leftMouseIsReleased = true;
                 }
-            }
-            if (Mouse.GetState().LeftButton == ButtonState.Released)
-            {
-                leftMouseIsReleased = true;
+
+                int currentMouseScroll = Mouse.GetState().ScrollWheelValue;
+                if (previousMouseScroll > currentMouseScroll)
+                {
+                    cameraTransforms.ZoomOut();
+                    previousMouseScroll = currentMouseScroll;
+                }
+                if (previousMouseScroll < currentMouseScroll)
+                {
+                    cameraTransforms.ZoomIn();
+                    previousMouseScroll = currentMouseScroll;
+                }
             }
 
-            int currentMouseScroll = Mouse.GetState().ScrollWheelValue;
-            if (previousMouseScroll > currentMouseScroll)
-            {
-                cameraTransforms.ZoomOut();
-                previousMouseScroll = currentMouseScroll;
-            }
-            if (previousMouseScroll < currentMouseScroll)
-            {
-                cameraTransforms.ZoomIn();
-                previousMouseScroll = currentMouseScroll;
-            }
 
             base.Update(gameTime);
         }

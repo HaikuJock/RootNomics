@@ -46,7 +46,7 @@ namespace RootNomicsGame
             mousePressEventProvider.Initialize(this);
             userInterface = new UserInterface(this, mousePressEventProvider, browserOpener, clipboard, audio);
             Components.Add(userInterface);
-            garden = new Garden(this);
+            garden = new Garden(this, userInterface);
             Components.Add(garden);
             // Robb: Add your component here: e.g.
             // Components.Add(garden);

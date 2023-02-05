@@ -84,13 +84,15 @@ namespace RootNomicsGame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape))
                 Exit();
 
+#if DEBUG
             if (Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.R))
             {
                 RestartGame();
             }
+#endif
             // TODO: Add your update logic here
             mousePressEventProvider.OnNewFrame(clipCursor: false);
 

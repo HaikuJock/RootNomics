@@ -5,6 +5,7 @@ using Haiku.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RootNomics.SimulationRender;
 using RootNomicsGame.Simulation;
 using RootNomicsGame.UI;
 using System;
@@ -107,12 +108,13 @@ namespace RootNomicsGame
 
         void RestartGame()
         {
+            var simulationRenderer = garden.Reset();
             userInterface.PopAllWindows();
             hud = new HUD(
                 new Rectangle(Point.Zero, screenSize),
                 userInterface,
                 audio,
-                new Simulator(),
+                new Simulator(simulationRenderer),
                 UiSpriteSheet,
                 RestartGame,
                 Exit);

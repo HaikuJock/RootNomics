@@ -14,16 +14,15 @@ namespace RootNomicsGame.Simulation
         public static int PlantHealingFactor = 3;
 
         DoranAndParberryEconomy economy;
-
-        internal Simulator()
+        private readonly SimulationRenderer simulationRenderer;
+        
+        internal Simulator(SimulationRenderer simulationRenderer)
         {
+            this.simulationRenderer = simulationRenderer;
         }
-
-        public static SimulationRenderer simulationRenderer;
 
         internal SimulationState Initialize(IDictionary<string, int> agentTypeCounts)
         {
-
             simulationRenderer.Reset();
 
             // simulationRenderer = new SimulationRenderer();

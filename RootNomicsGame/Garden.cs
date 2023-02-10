@@ -94,6 +94,12 @@ namespace RootNomicsGame
             this.userInterface = userInterface;
         }
 
+        public SimulationRenderer Reset()
+        {
+            simulationRenderer.Reset();
+            return simulationRenderer;
+        }
+
         protected override void LoadContent()
         {
             drawLine = new DrawLine(GraphicsDevice, cameraTransforms);
@@ -130,7 +136,6 @@ namespace RootNomicsGame
             modelTombstone = Game.Content.Load<Model>("tombstone");
             modelTerrain1 = Game.Content.Load<Model>("terrain1");
 
-
             groundTiles = new GroundTiles(modelCubeWedge0, modelCubeWedge1);
             simulationRenderer.SetGroundTiles(groundTiles);
 
@@ -159,9 +164,6 @@ namespace RootNomicsGame
             simulationRenderer.RegisterGameModel("plant1", modelPlant1);
             simulationRenderer.RegisterGameModel("reeds1", modelReeds1);
             simulationRenderer.RegisterGameModel("terrain1", modelTerrain1);
-
-
-            Simulator.simulationRenderer = simulationRenderer;
         }
 
         private int previousMouseScroll = 0;

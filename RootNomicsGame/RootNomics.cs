@@ -101,6 +101,7 @@ namespace RootNomicsGame
 #endif
             // TODO: Add your update logic here
             mousePressEventProvider.OnNewFrame(clipCursor: false);
+            hud.Update(gameTime.ElapsedGameTime.TotalSeconds);
 
             base.Update(gameTime);
             userInterface.PostUpdate();

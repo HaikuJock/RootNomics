@@ -38,6 +38,8 @@ namespace RootNomicsGame.UI
         SpriteSheet uiTextureAtlas;
         private readonly Action restart;
         private readonly Action quit;
+        internal bool IsSimulating => simulationUpdateCount >= 0;
+        private int simulationUpdateCount = -1;
 
         public HUD(
             Rectangle frame,
@@ -89,15 +91,35 @@ namespace RootNomicsGame.UI
             UpdateFromSimulationState(state);
         }
 
+        public override void Update(double deltaSeconds)
+        {
+            if (IsSimulating)
+            {
+                var agentValues = agentCountSliders.GetValues();
+                var healing = consumption.GetValues();
+
+                var state = simulator.Simulate(agentValues, healing[ConsumptionPanel.PlantHealingKey], healing[ConsumptionPanel.PlayerHealingKey]);
+
+                UpdateFromSimulationState(state);
+                ++simulationUpdateCount;
+
+                if (simulationUpdateCount >= 60)
+                {
+                    CompleteTurn(state, healing);
+                }
+            }
+            base.Update(deltaSeconds);
+        }
+
         void EndTurn(object button)
         {
-            var agentValues = agentCountSliders.GetValues();
-            var healing = consumption.GetValues();
+            simulationUpdateCount = 0;
+            IsInteractionEnabled = false;
+            Add(Animate().Opacity(from: 1f, to: 0.5f).Over(0.4).Curving(RCurve.QuadEaseOut));
+        }
 
-            var state = simulator.Simulate(agentValues, healing[ConsumptionPanel.PlantHealingKey], healing[ConsumptionPanel.PlayerHealingKey]);
-
-            UpdateFromSimulationState(state);
-
+        void CompleteTurn(SimulationState state, Dictionary<string, int> healing)
+        {
             var damage = damageMin + random.NextDouble() * (damageMax - damageMin);
             int actualDamage = (int)Math.Round(damage);
             actualDamage -= healing[ConsumptionPanel.PlayerHealingKey];
@@ -116,6 +138,10 @@ namespace RootNomicsGame.UI
             var max = Math.Max(0, DamageMax - LinkedSlider.PlayerHealSlider.Value);
 
             playerPanel.Update(actualDamage, min, max);
+
+            simulationUpdateCount = -1;
+            IsInteractionEnabled = true;
+            Add(Animate().Opacity(from: 0.5f, to: 1f).Over(0.4).Curving(RCurve.QuadEaseIn));
 
             if (playerPanel.Health <= 0
                 && state.TotalWealth <= 0)

@@ -42,7 +42,10 @@ namespace RootNomicsGame.Simulation
             return CalculateSimulationState();
         }
 
-        internal SimulationState Simulate(IDictionary<string, int> agentTypeCounts, int healingForPlants, int healingForPlayer)
+        internal SimulationState Simulate(
+            IDictionary<string, int> agentTypeCounts,
+            float healingForPlants,
+            float healingForPlayer)
         {
             economy.enforceAgentTypeCounts("default", agentTypeCounts);
             var market = economy.getMarket("default");

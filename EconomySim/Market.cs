@@ -439,36 +439,38 @@ namespace EconomySim
 	    }
 
 
-        public void addMoney(int amount)
+        public void addMoney(float amount)
         {
 			var random = new Random();
 
-            while (amount > 0)
+            while (amount > 0f)
 			{
 				var index = random.Next(0, _agents.Count);
 				var agent = _agents[index];
+				var quantity = Math.Min(1f, amount);
 
-				agent.money += 1;
-				amount -= 1;
+				agent.money += quantity;
+				amount -= quantity;
 			}
         }
 
-        public void taxTheRich(int amount)
+        public void taxTheRich(float amount)
         {
             var random = new Random();
 			var agentsWithMoney = _agents.Where(a => a.money > 1).ToList();
-            var totalMoney = (int)Math.Floor(agentsWithMoney.Select(a => a.money).Sum());
-			var reduction = Math.Min(totalMoney, amount);
+            var totalMoney = Math.Floor(agentsWithMoney.Select(a => a.money).Sum());
+			var reduction = Math.Min(totalMoney, (double)amount);
 
             while (reduction > 0)
             {
                 var index = random.Next(0, agentsWithMoney.Count);
                 var agent = agentsWithMoney[index];
+				var quantity = Math.Min(1, reduction);
 
-				if (agent.money > 1)
+				if (agent.money >= quantity)
 				{
-                    agent.money += 1;
-                    reduction -= 1;
+                    agent.money += quantity;
+                    reduction -= quantity;
                 }
 				else
 				{
@@ -477,11 +479,11 @@ namespace EconomySim
             }
         }
 
-        public void removeGood(string goodType, int amount)
+        public void removeGood(string goodType, float amount)
         {
 			var agentsWithGood = _agents.Where(agent => agent.queryInventory(goodType) > 0).ToList();
-            var totalOfGood = agentsWithGood.Aggregate(0.0, (accum, agent) => accum + agent.queryInventory(goodType));
-			var toRemove = Math.Min(amount, totalOfGood);
+            double totalOfGood = agentsWithGood.Aggregate(0.0, (accum, agent) => accum + agent.queryInventory(goodType));
+			var toRemove = Math.Min((double)amount, totalOfGood);
 			var random = new Random();
 
 			while (toRemove > 0)

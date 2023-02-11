@@ -93,17 +93,23 @@ namespace RootNomicsGame.UI
 
         public override void Update(double deltaSeconds)
         {
+            const float UpdatesPerTurn = 60f;
+            const float HealingScale = 1.4f;
+
             if (IsSimulating)
             {
                 var agentValues = agentCountSliders.GetValues();
                 var healing = consumption.GetValues();
 
-                var state = simulator.Simulate(agentValues, healing[ConsumptionPanel.PlantHealingKey], healing[ConsumptionPanel.PlayerHealingKey]);
+                var state = simulator.Simulate(
+                    agentValues,
+                    (healing[ConsumptionPanel.PlantHealingKey] / UpdatesPerTurn) * HealingScale,
+                    (healing[ConsumptionPanel.PlayerHealingKey] / UpdatesPerTurn) * HealingScale);
 
                 UpdateFromSimulationState(state);
                 ++simulationUpdateCount;
 
-                if (simulationUpdateCount >= 60)
+                if (simulationUpdateCount >= UpdatesPerTurn)
                 {
                     CompleteTurn(state, healing);
                 }

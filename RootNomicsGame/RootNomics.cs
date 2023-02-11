@@ -51,8 +51,6 @@ namespace RootNomicsGame
             Components.Add(userInterface);
             garden = new Garden(this, userInterface);
             Components.Add(garden);
-            // Robb: Add your component here: e.g.
-            // Components.Add(garden);
             IsMouseVisible = true;
         }
 

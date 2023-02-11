@@ -38,7 +38,8 @@ namespace RootNomics.SimulationRender
         public void DrawModels(CameraTransforms cameraTransforms)
         {
             Matrix T = Matrix.CreateTranslation(boardX, boardY, 0);
-            Vector3 scale = Vector3.Multiply(new Vector3(1, 1, 1), Wealth / 50f);
+            var wealthScale = Math.Max(0.1f, Wealth);
+            Vector3 scale = Vector3.Multiply(new Vector3(1, 1, 1), wealthScale / 50f);
             Matrix S = Matrix.CreateScale(scale);
             Matrix R = Matrix.CreateRotationZ(MathHelper.ToRadians(modelRotationDegrees));
 
@@ -52,10 +53,9 @@ namespace RootNomics.SimulationRender
                 {
                     BasicEffect basicEffect = (BasicEffect)effect;
                     CommonBasicEffects.SetEffects(basicEffect);
-                    basicEffect.World = cameraTransforms.worldMatrix;
                     basicEffect.View = cameraTransforms.viewMatrix;
                     basicEffect.Projection = cameraTransforms.projectionMatrix;
-                    basicEffect.World = Matrix.Multiply(transform, basicEffect.World);
+                    basicEffect.World = Matrix.Multiply(transform, cameraTransforms.worldMatrix);
                 }
                 mesh.Draw();
             }

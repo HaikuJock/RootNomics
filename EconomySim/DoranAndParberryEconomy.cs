@@ -140,6 +140,7 @@ namespace EconomySim
             // except this agent has no money, that's why we're here
             // too much money going into the system
             //newAgent.money /= 4.0;
+            newAgent.money = 0;
             if (Funds > 0)
             {
                 var inheritedDebt = agent.money;    // -ve or zero
@@ -149,10 +150,7 @@ namespace EconomySim
                 newAgent.money = funding;
                 Funds -= funding;
             }
-            else
-            {
-                newAgent.money = agent.money;
-            }
+            newAgent.money = Math.Max(newAgent.money, 10);
 		    market.replaceAgent(agent, newAgent);
 	    }
 

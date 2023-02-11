@@ -140,17 +140,20 @@ namespace EconomySim
             // except this agent has no money, that's why we're here
             // too much money going into the system
             //newAgent.money /= 4.0;
-            newAgent.money = 0;
+            // newAgent.money is from AgentData at this point; 100 for all types except workers who start with 10
             if (Funds > 0)
             {
                 var inheritedDebt = agent.money;    // -ve or zero
                 var inheritedMoney = newAgent.money + inheritedDebt;
                 var funding = Math.Min(inheritedMoney, Funds);
 
-                newAgent.money = funding;
+                newAgent.money = Math.Max(funding, 10);
                 Funds -= funding;
             }
-            newAgent.money = Math.Max(newAgent.money, 10);
+            else
+            {
+                newAgent.money = 10;
+            }
 		    market.replaceAgent(agent, newAgent);
 	    }
 

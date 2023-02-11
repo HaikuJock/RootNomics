@@ -65,7 +65,7 @@ namespace RootNomics.Environment
             {
                 (int delay, int ordinal) tileInfo = tilesRecentlyReleased[i];
                 tileInfo.delay--;
-                if (tileInfo.delay == 0)
+                if (tileInfo.delay == 0 && freeTiles.Count > 0)
                 {
                     int randomIndex = RandomNum.GetRandomInt(0, freeTiles.Count - 1);
                     freeTiles.Insert(randomIndex, tileInfo.ordinal);

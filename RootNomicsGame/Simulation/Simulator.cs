@@ -1,4 +1,5 @@
 ﻿using EconomySim;
+using Haiku;
 using RootNomics.SimulationRender;
 using System;
 using System.Collections.Generic;
@@ -72,6 +73,7 @@ namespace RootNomicsGame.Simulation
             economy.simulate(1);
 
             SimulationState simulationState = CalculateSimulationState();
+            Log.Debug($"Agents: {simulationState.Agents.Count}");
             simulationRenderer.Update(simulationState.Agents);
             return simulationState;
         }
@@ -88,7 +90,15 @@ namespace RootNomicsGame.Simulation
             };
 
             var typeIds = Configuration.AgentTypeNames.Keys.ToList();
-
+            var allTypeIds = new string[]
+            {
+                "blacksmith",
+                "farmer",
+                "miner",
+                "refiner",
+                "woodcutter",
+                "worker",
+            };
             foreach (var type in typeIds)
             {
                 result.AgentTypeCounts[type] = 0;
@@ -96,7 +106,7 @@ namespace RootNomicsGame.Simulation
 
             foreach (var agent in market._agents)
             {
-                if (typeIds.Contains(agent.className))
+                if (allTypeIds.Contains(agent.className))
                 {
                     result.Agents.Add(new Agent
                     {
@@ -104,7 +114,10 @@ namespace RootNomicsGame.Simulation
                         Type = agent.className,
                         Wealth = (int)Math.Round(agent.money),
                     });
-                    result.AgentTypeCounts[agent.className] = result.AgentTypeCounts[agent.className] + 1;
+                    if (typeIds.Contains(agent.className))
+                    {
+                        result.AgentTypeCounts[agent.className] = result.AgentTypeCounts[agent.className] + 1;
+                    }
                 }
             }
 

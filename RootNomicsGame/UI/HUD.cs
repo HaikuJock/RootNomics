@@ -184,7 +184,7 @@ namespace RootNomicsGame.UI
         private void UpdateFromSimulationState(SimulationState state)
         {
             stats.Update(state);
-            agentCountSliders.Update(state.AgentTypeCounts, state.Agents.Count);
+            agentCountSliders.Update(state.AgentTypeCounts, state.AgentTypeCounts.Sum(kv  => kv.Value));
             consumption.Update(state.TotalMagicJuice);
         }
 

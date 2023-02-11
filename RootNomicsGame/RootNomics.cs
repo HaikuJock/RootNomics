@@ -1,4 +1,5 @@
-﻿using Haiku.Audio;
+﻿using Haiku;
+using Haiku.Audio;
 using Haiku.MonoGameUI;
 using Haiku.MonoGameUI.Layouts;
 using Haiku.UI;
@@ -38,6 +39,7 @@ namespace RootNomicsGame
             TextClipboarding clipboard,
             AudioPlaying audio)
         {
+            Log.Logger = new NonBlockingLogger();
             this.mousePressEventProvider = mousePressEventProvider;
             this.browserOpener = browserOpener;
             this.clipboard = clipboard;

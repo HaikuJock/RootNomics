@@ -24,44 +24,5 @@ namespace RootNomicsGame.Simulation
             TotalWealth = 0;
             TotalMagicJuice = 0;
         }
-
-        internal static SimulationState FakeState()
-        {
-            var state = new SimulationState();
-
-            var random = new Random();
-
-            state.TotalFood = random.Next(10, 100);
-            state.TotalWealth = 0;
-            state.TotalMagicJuice = random.Next(10, 100);
-
-            var agentCount = random.Next(0, 100);
-            var typeIds = Configuration.AgentTypeNames.Keys.ToList();
-
-            foreach (var type in typeIds)
-            {
-                state.AgentTypeCounts[type] = 0;
-            }
-
-            for (int i = 0; i < agentCount; i++)
-            {
-                var typeIndex = random.Next(0, typeIds.Count);
-                var type = typeIds[typeIndex];
-                var wealth = random.Next(0, 33);
-
-                state.TotalWealth += wealth;
-                state.Agents.Add(new Agent()
-                {
-                    Id = i.ToString(),
-                    Type = type,
-                    Wealth = wealth,
-                });
-                state.AgentTypeCounts[type] = state.AgentTypeCounts[type] +1;
-            }
-
-
-
-            return state;
-        }
     }
 }

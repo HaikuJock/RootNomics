@@ -38,8 +38,8 @@ namespace RootNomics.SimulationRender
         public void DrawModels(CameraTransforms cameraTransforms)
         {
             Matrix T = Matrix.CreateTranslation(boardX, boardY, 0);
-            var wealthScale = Math.Max(0.1f, Wealth);
-            Vector3 scale = Vector3.Multiply(new Vector3(1, 1, 1), wealthScale / 50f);
+            var wealthScale = Math.Max(1f, Wealth) / 30f;
+            Vector3 scale = Vector3.Multiply(new Vector3(1, 1, 1), wealthScale);
             Matrix S = Matrix.CreateScale(scale);
             Matrix R = Matrix.CreateRotationZ(MathHelper.ToRadians(modelRotationDegrees));
 

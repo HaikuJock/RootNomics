@@ -73,7 +73,7 @@ namespace RootNomicsGame.Simulation
             economy.simulate(1);
 
             SimulationState simulationState = CalculateSimulationState();
-            Log.Debug($"Agents: {simulationState.Agents.Count}");
+            Log.Debug($"Live Agents: {simulationState.Agents.Where(a => a.Wealth > 0).Count()}");
             simulationRenderer.Update(simulationState.Agents);
             return simulationState;
         }
